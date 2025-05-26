@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ThrillX Sign Up Page</title>
+	  <link rel="icon" type="image/x-icon" href="icons/ThrillX Logo.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        .font-bebas {
+            font-family: 'Bebas Neue', sans-serif;
+        }
+        .font-roboto {
+            font-family: 'Roboto', sans-serif;
+        }
+        .font-roboto-mono {
+            font-family: 'Roboto Mono', monospace;
+        }
+        .hide-date-icon::-webkit-calendar-picker-indicator {
+            display: none;
+        }
+        .hide-date-icon {
+            -webkit-appearance: none;
+            appearance: none;
+        }
+
+    </style>
+</head>
+
+<!-- Navbar -->
+<nav class="p-4 fixed top-0 w-full z-50 bg-[#0f0f0f]">
+    <div class="container mx-auto flex items-center justify-between">
+        <!-- Logo and Currency Dropdown -->
+        <div class="flex items-center space-x-4">
+            <img src="icons/ThrillX Logo.png" alt="ThrillX Logo" class="h-16">
+            <select class="bg-[#0f0f0f] text-white py-1 px-3 rounded-xl text-xl font-roboto-mono">
+                <option value="idr">IDR</option>
+                <option value="usd">USD</option>
+                <option value="eur">EUR</option>
+                <option value="gbp">GBP</option>
+            </select>
+        </div>
+        
+       
+</nav>
+<body class="h-screen bg-gray-100 flex items-center justify-center mt-16 font-roboto-mono tracking-wide">
+
+    <div class="w-3/4 h-5/6 bg-white rounded-xl overflow-hidden flex">
+        
+        <!-- Left Section: Image -->
+        <div class="w-1/2 drop-shadow-[0_35px_35px_rgba(0,0,0,0.25)] pr-4 pb-4">
+            <img src="images/rockclimb-login.png" alt="Rock Climbing" class="h-full w-full object-cover">
+        </div>
+
+        <!-- Right Section: Login Form -->
+        <div class="w-1/2 flex flex-col justify-center items-center p-12 shadow-lg">
+            <h2 class="text-3xl font-extrabold mb-2 tracking-wide">GET STARTED</h2>
+            <p class="text-sm font-semibold font-roboto mb-6">
+                Already have an account? 
+                <a href="LoginPage.html" class="text-[#730008] font-semibold font-roboto">Log In</a>
+            </p>
+
+            <form class="w-full">
+                <!-- Username Input -->
+                <div class="relative mb-4">
+                    <label for="namesignup" class="font-bold font-roboto-mono">Name</label><br>
+                    <input 
+                        id="username"
+                        type="text" 
+                        placeholder="Enter Username Here" 
+                        class="w-full pl-4 px-3 py-3 border border-black rounded-lg focus:outline-none focus:ring-2 focus:ring-[#9A040F] font-roboto"
+                        required>
+                        <span class="absolute right-3 top-8 rounded-lg text-red-600 bg-[#4D0006] px-3 py-1">
+                            <i class="fa-solid fa-user fa-xs" style="color: #fdf7fa;"></i>
+                        </span>
+                </div>
+
+                <!-- Email Input -->
+                <div class="relative mb-4">
+                    <label for="emailsignup" class="font-bold font-roboto-mono">Email</label><br>
+                    <input
+                        id="email" 
+                        type="text" 
+                        placeholder="Enter Email Here" 
+                        class="w-full pl-4 px-3 py-3 border border-black rounded-lg focus:outline-none focus:ring-2 focus:ring-[#9A040F] font-roboto"
+                        required>
+                        <span class="absolute right-3 top-8 rounded-lg text-red-600 bg-[#4D0006] px-3 py-1">
+                            <i class="fa-solid fa-envelope fa-xs" style="color: #fdf7fa;"></i>
+                        </span>
+                </div>
+
+                <!-- Password Input -->
+                <div class="relative mb-4">
+                    <label for="passwordsignup" class="font-bold font-roboto-mono">Password</label><br>
+                    <input 
+                        id="password"
+                        type="password" 
+                        placeholder="Enter Password Here" 
+                        class="w-full pl-4 px-3 py-3 border border-black rounded-lg focus:outline-none focus:ring-2 focus:ring-[#9A040F] font-roboto"
+                        required>
+                        <span class="absolute right-3 top-8 rounded-lg text-red-600 bg-[#4D0006] px-3 py-1">
+                            <i class="fa-solid fa-key fa-xs" style="color: #fdf7fa;"></i>
+                        </span>
+                </div>
+
+                <!-- Submit Button -->
+                <button 
+                    id="submit"
+                    type="submit" 
+                    class="w-full bg-[#9A040F] hover:bg-[#730008] text-white font-bold py-3 rounded-lg transition-colors duration-300">
+                    SIGN UP
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <script type="module" src="SessionTimeout.js"></script>
+    <script type="module" src="signUp.js" defer></script>
+    <script type="module" src="checkCurrentLogin.js"></script>
+    
+</body>
+
+</html>

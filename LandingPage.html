@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ThrillX Landing Page</title>
+	  <link rel="icon" type="image/x-icon" href="icons/ThrillX Logo.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+	<script src="SessionTimeout.js"></script>
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        .font-bebas {
+            font-family: 'Bebas Neue', sans-serif;
+        }
+        .font-roboto {
+            font-family: 'Roboto', sans-serif;
+        }
+        .font-roboto-mono {
+            font-family: 'Roboto Mono', monospace;
+        }
+    </style>
+	
+    <!-- <script>
+        const datePicker = document.getElementById("datePicker");
+
+        datePicker.addEventListener("focus", function () {
+            this.showPicker();
+        });
+
+    </script> -->
+	
+</head>
+
+	<!-- Navbar -->
+	<nav class="p-4 fixed top-0 w-full z-50 bg-[#000000]">
+		<div class="container mx-auto flex items-center justify-between">
+			<!-- Logo and Currency Dropdown -->
+			<div class="flex items-center space-x-4">
+				<a href="LandingPage.html">
+					<img src="icons/ThrillX Logo.png" alt="ThrillX Logo" class="h-16">
+				</a>
+				<select class="bg-[#000000] text-white py-1 px-3 text-xl font-roboto-mono">
+					<option value="idr">IDR</option>
+					<option value="usd">USD</option>
+					<option value="eur">EUR</option>
+					<option value="gbp">GBP</option>
+					<option value="gbp">SGP</option>
+					<option value="gbp">AUD</option>
+				</select>
+			</div>
+			
+			<!-- Links -->
+			<div class="flex flex-1 pr-12 justify-center items-center space-x-8">
+				<a href="#" class="text-[#9A040F] hover:text-[#9A040F] text-xl font-roboto-mono tracking-wider hidden lg:block">ACTIVITIES</a>
+				<div class="inline-block h-10 w-0.5 bg-[#919191] mx-4 hidden lg:block"></div>
+				<a href="#" class="text-[#919191] hover:text-gray-100 text-xl font-roboto-mono tracking-wider hidden lg:block">EXPLORE</a>
+				<div class="inline-block h-10 w-0.5 bg-[#919191] mx-4 hidden lg:block"></div>
+				
+				<!-- Dropdown Wrapper for ACCOUNT -->
+				<div class="relative inline-block text-left">
+					<button id="accountDropdownButton" type="button" class="text-[#919191] hover:text-gray-100 text-xl font-roboto-mono tracking-wider hidden lg:block focus:outline-none">
+						ACCOUNT
+					</button>
+					
+					<!-- Dropdown Menu -->
+					<div id="accountDropdownMenu" class="z-10 origin-top-right absolute right-0 mt-2 w-56 rounded-lg shadow-lg bg-white ring-1 ring-black ring-opacity-5 hidden">
+						<div class="px-4 py-2 text-gray-700">
+							<p class="USERNAME font-bold">Username</p>
+							<p class="EMAIL">user@example.com</p>
+						</div>
+						<hr class="border-gray-300">
+						<a id="LogOutButton" class="block px-4 py-2 text-gray-700 hover:bg-[#A61E28] hover:text-white rounded-b-lg text-center font-semibold">
+							Logout
+						</a>
+					</div>
+				</div>
+			</div>
+			
+			<!-- Help and Cart -->
+			<div class="flex items-center space-x-4">
+				<a href="#" class="text-[#919191] hover:text-gray-100 text-xl font-roboto-mono">HELP</a>
+				<div class="inline-block h-10 w-0.5 bg-[#919191] mx-4"></div>
+				<a href="ShoppingCart.html" class="bg-white text-gray-500 hover:bg-[#6b0c0c] hover:text-white uppercase py-1 px-3 rounded-xl text-xl font-roboto-mono">CART</a>
+			</div>
+		</div>
+	</nav>
+	
+	<!-- Scroll to Top Button -->
+		<button id="scrollToTopButton" class="fixed bottom-1 right-1 bg-[#A61E28] text-white rounded-full px-3 py-2 shadow-lg hidden transition-opacity duration-300 ease-in-out opacity-0 hover:opacity-100 z-50">
+			<i class="fas fa-arrow-up-from-bracket"></i>
+		</button>
+
+	<!-- Landing  -->
+    <section class="relative bg-cover bg-center h-[700px]" style="background-image: url('images/landing.png')">
+        <div class="absolute inset-0 bg-gradient-to-r from-black to-gray flex items-center justify-center">
+            <div class="text-center text-white">
+                <h1 class="text-8xl font-normal font-bebas tracking-wide">READY TO TRY 
+                    <br><span class="text-[#9A040F]">SOMETHING NEW?</span>
+                </h1>
+                <p class="mt-4 font-roboto-mono tracking-widest text-xl">FIND WHAT'S KEEPING YOUR ADRENALINE UP</p>
+                <div class="mt-8 space-y-4">
+                    <div class="flex items-center justify-center space-x-4">
+                        <!-- Location, Guests Inputs -->
+                        <div class="relative flex items-center w-full">
+                            <i class="fas fa-map-marker-alt absolute left-4 text-black"></i>
+                            <input id="locationInput" type="text" placeholder="Location" class="px-4 py-3 pl-12 text-black bg-white rounded-xl font-roboto-mono w-full">
+                        </div>
+                        <div class="relative flex items-center w-full">
+                            <i class="fas fa-users absolute left-4 text-black"></i>
+                            <input id="numberGuestInput" type="text" placeholder="Guests" class="px-4 py-3 pl-12 text-black bg-white rounded-xl font-roboto-mono w-full">
+                        </div>
+                    </div>
+                    <!-- Search Input -->
+                    <div class="flex items-center justify-center mt-4">
+                        <div class="relative flex items-center w-full max-w-4xl">
+                            <input id="searchInput" type="text" class="px-4 py-6 text-gray-700 bg-white rounded-xl w-full" placeholder="Search">
+                            <button id="searchButton" class="absolute inset-y-2 right-1 bg-[#730008] text-white font-roboto mt-1 mb-1 mr-4 py-2 px-7 rounded-xl flex items-center justify-center">
+                                <img src="icons/search.png" alt="Search Icon" class="h-6 w-6">
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+		<!-- Categories Filter -->
+		<section class="relative z-20 -mt-16">
+			<div class="container mx-auto flex justify-center">
+				<div class="bg-[#A61E28] py-2 px-20 rounded-xl flex justify-center space-x-8">
+					<button id="waterButton" class="bg-[#A61E28] hover:text-black font-roboto-mono font-semi-bold tracking-widest text-lg text-white py-2 px-6 rounded-full flex flex-col items-center space-y-2">
+						<img src="icons/water.png" alt="Water Icon" class="h-10 w-6">
+						<span class="uppercase">Water</span>
+					</button>
+					<button id="airButton" class="bg-[#A61E28] hover:text-black font-roboto-mono font-semi-bold tracking-widest text-lg text-white py-2 px-6 rounded-full flex flex-col items-center space-y-2">
+						<img src="icons/air.png" alt="Air Icon" class="h-10 w-10">
+						<span class="uppercase">Air</span>
+					</button>
+					<button id="landButton" class="bg-[#A61E28] hover:text-black font-roboto-mono font-semi-bold tracking-widest text-lg text-white py-2 px-6 rounded-full flex flex-col items-center space-y-2">
+						<img src="icons/land.png" alt="Land Icon" class="h-10 w-10">
+						<span class="uppercase">Land</span>
+					</button>
+					<button id="fireButton" class="bg-[#A61E28] hover:text-black font-roboto-mono font-semi-bold tracking-widest text-lg text-white py-2 px-6 rounded-full flex flex-col items-center space-y-2">
+						<img src="icons/fire.png" alt="Fire Icon" class="h-10 w-10">
+						<span class="uppercase">Fire</span>
+					</button>
+				</div>
+			</div>
+		
+		<!-- Filter by Section -->
+		<section class="py-8 bg-white">
+			<div class="container mx-auto pt-6">
+				<!-- Dropdown Wrapper -->
+				<div class="absolute right-8 pb-4 text-left border-black">
+					<div>
+						<button id="dropdownButton" type="button" class="inline-flex justify-between w-50 rounded-xl bg-white text-black border border-black font-roboto-mono py-2 px-5">
+							Price <!-- default -->
+							<i class="fas fa-sliders ml-4 mt-1"></i>
+						</button>
+					</div>
+					<!-- Dropdown Menu -->
+					<div id="dropdownMenu" class="z-10 origin-top-right absolute right-0 mt-2 w-50 rounded-xl shadow-lg bg-white ring-1 ring-black ring-opacity-5 hidden">
+						<div class="py-1" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
+							<a href="#" class="block px-4 py-2 text-gray-700 text-large hover:bg-[#A61E28] hover:text-white rounded-lg" role="menuitem" data-value="price-highest">Highest</a>
+							<a href="#" class="block px-4 py-2 text-gray-700 text-large hover:bg-[#A61E28] hover:text-white rounded-lg" role="menuitem" data-value="price-lowest">Lowest</a>
+						</div>
+					</div>
+				</div>
+				<div id="activityContainer" class="grid grid-cols-1 md:grid-cols-3 gap-2 pt-14">
+					<!-- First Activity -->
+					<!-- <a href="BookingPage.html?id=activity1" class="activity-card block bg-white p-4 rounded-lg shadow group transition duration-300 transform hover:bg-gray-200">
+						<img src="images/5gx.png" alt="5GX Reverse Bungy" class="rounded-lg mb-4 h-60 w-full object-cover">
+						<div class="flex justify-between items-center mb-2">
+							<h3 class="text-xl font-roboto-mono font-bold text-[#000000]">Denpasar, Bali</h3>
+							<p class="text-[#000000] text-lg font-bold">4.9 <i class="fa-solid fa-star fa-lg" style="color: #FFD43B;"></i></p>
+						</div>
+						<h3 class="text-2xl font-roboto-mono font-bold text-[#000000]">5GX Reverse Bungy</h3>
+						<p class="text-lg font-roboto-mono font-bold text-[#000000] mt-1">From Rp 700,000</p>
+					</a> -->
+
+					<!-- Second Activity -->
+					<!-- <a href="BookingPage.html?id=activity2" class="activity-card block bg-white p-4 rounded-lg shadow group transition duration-300 transform hover:bg-gray-200">
+						<img src="images/jetski.png" alt="Fun Jet Ski and Water Sport" class="rounded-lg mb-4 h-60 w-full object-cover">
+						<div class="flex justify-between items-center mb-2">
+							<h3 class="text-xl font-roboto-mono font-bold text-[#000000]">Tanjung Benoa, Bali</h3>
+							<p class="text-[#000000] text-lg font-bold">4.7 <i class="fa-solid fa-star fa-lg" style="color: #FFD43B;"></i></p>
+						</div>
+						<h3 class="text-2xl font-roboto-mono font-bold text-[#000000]">Fun Jet Ski and Water Sport</h3>
+						<p class="text-lg font-roboto-mono font-bold text-[#000000] mt-1">From Rp 600,000</p>
+					</a> -->
+
+					<!-- Third Activity -->
+					<!-- <a href="BookingPage.html?id=activity3" class="activity-card block bg-white p-4 rounded-lg shadow group transition duration-300 transform hover:bg-gray-200">
+						<img src="images/flyboard.png" alt="Fly Board Experience" class="rounded-lg mb-4 h-60 w-full object-cover">
+						<div class="flex justify-between items-center mb-2">
+							<h3 class="text-xl font-roboto-mono font-bold text-[#000000]">Denpasar, Bali</h3>
+							<p class="text-[#000000] text-lg font-bold">4.5 <i class="fa-solid fa-star fa-lg" style="color: #FFD43B;"></i></p>
+						</div>
+						<h3 class="text-2xl font-roboto-mono font-bold text-[#000000]">Fly Board Experience</h3>
+						<p class="text-lg font-roboto-mono font-bold text-[#000000] mt-1">From Rp 1,200,000</p>
+					</a> -->
+
+					<!-- Fourth Activity -->
+					<!-- <a href="BookingPage.html?id=activity4" class="activity-card block bg-white p-4 rounded-lg shadow group transition duration-300 transform hover:bg-gray-200">
+						<img src="images/atvride.png" alt="ATV Quad Bike Adventure" class="rounded-lg mb-4 h-60 w-full object-cover">
+						<div class="flex justify-between items-center mb-2">
+							<h3 class="text-xl font-roboto-mono font-bold text-[#000000]">Ubud, Bali</h3>
+							<p class="text-[#000000] text-lg font-bold">4.5 <i class="fa-solid fa-star fa-lg" style="color: #FFD43B;"></i></p>
+						</div>
+						<h3 class="text-2xl font-roboto-mono font-bold text-[#000000]">ATV Quad Bike Adventure</h3>
+						<p class="text-lg font-roboto-mono font-bold text-[#000000] mt-1">From Rp 460,000</p>
+					</a> -->
+
+					<!-- Fifth Activity -->
+					<!-- <a href="BookingPage.html?id=activity5" class="activity-card block bg-white p-4 rounded-lg shadow group transition duration-300 transform hover:bg-gray-200">
+						<img src="images/atvExtremeTrek.jpeg" alt="Ubud ATV Extreme Trek class="rounded-lg mb-4 h-60 w-full object-cover">
+						<div class="flex justify-between items-center mb-2">
+							<h3 class="text-xl font-roboto-mono font-bold text-[#000000]">Ubud, Bali</h3>
+							<p class="text-[#000000] text-lg font-bold">4.5 <i class="fa-solid fa-star fa-lg" style="color: #FFD43B;"></i></p>
+						</div>
+						<h3 class="text-2xl font-roboto-mono font-bold text-[#000000]">Ubud ATV Extreme Trek</h3>
+						<p class="text-lg font-roboto-mono font-bold text-[#000000] mt-1">From Rp 620,000</p>
+					</a> -->
+
+					<!-- Sixth Activity -->
+					<!-- <a href="BookingPage.html?id=activity6" class="activity-card block bg-white p-4 rounded-lg shadow group transition duration-300 transform hover:bg-gray-200">
+						<img src="images/rockclimbing.png" alt="Rock Climbing Experience" class="rounded-lg mb-4 h-60 w-full object-cover">
+						<div class="flex justify-between items-center mb-2">
+							<h3 class="text-xl font-roboto-mono font-bold text-[#000000]">Kuta, Bali</h3>
+							<p class="text-[#000000] text-lg font-bold">4.9 <i class="fa-solid fa-star fa-lg" style="color: #FFD43B;"></i></p>
+						</div>
+						<h3 class="text-2xl font-roboto-mono font-bold text-[#000000]">Rock Climbing Experience</h3>
+						<p class="text-lg font-roboto-mono font-bold text-[#000000] mt-1">From Rp 1,100,000</p>
+					</a> -->
+
+					<!-- Seventh Activity -->
+					<!-- <a href="BookingPage.html?id=activity7" class="activity-card block bg-white p-4 rounded-lg shadow group transition duration-300 transform hover:bg-gray-200">
+						<img src="images/skydiving.png" alt="Annual Bali Skydiving" class="rounded-lg mb-4 h-60 w-full object-cover">
+						<div class="flex justify-between items-center mb-2">
+							<h3 class="text-xl font-roboto-mono font-bold text-[#000000]">Kuta, Bali</h3>
+							<p class="text-[#000000] text-lg font-bold">4.7 <i class="fa-solid fa-star fa-lg" style="color: #FFD43B;"></i></p>
+						</div>
+						<h3 class="text-2xl font-roboto-mono font-bold text-[#000000]">Annual Bali Skydiving</h3>
+						<p class="text-lg font-roboto-mono font-bold text-[#000000] mt-1">From Rp 20,000,000</p>
+					</a> -->
+
+					<!-- Eighth Activity -->
+					<!-- <a href="BookingPage.html?id=activity8" class="activity-card block bg-white p-4 rounded-lg shadow group transition duration-300 transform hover:bg-gray-200">
+						<img src="images/MantaBaySnorkeling.webp" alt="Manta Bay Snorkeling" class="rounded-lg mb-4 h-60 w-full object-cover">
+						<div class="flex justify-between items-center mb-2">
+							<h3 class="text-xl font-roboto-mono font-bold text-[#000000]">Nusa Lembongan, Bali</h3>
+							<p class="text-[#000000] text-lg font-bold">4.5 <i class="fa-solid fa-star fa-lg" style="color: #FFD43B;"></i></p>
+						</div>
+						<h3 class="text-2xl font-roboto-mono font-bold text-[#000000]">Manta Bay Snorkeling</h3>
+						<p class="text-lg font-roboto-mono font-bold text-[#000000] mt-1">From Rp 393,750</p>
+					</a> -->
+
+					<!-- Ninth Activity -->
+					<!-- <a href="BookingPage.html?id=activity9" class="activity-card block bg-white p-4 rounded-lg shadow group transition duration-300 transform hover:bg-gray-200">
+						<img src="images/MountBaturSunriseTrekking.jpg" alt="Mount Batur 4WD Jeep" class="rounded-lg mb-4 h-60 w-full object-cover">
+						<div class="flex justify-between items-center mb-2">
+							<h3 class="text-xl font-roboto-mono font-bold text-[#000000]">Mount Batur, Bali</h3>
+							<p class="text-[#000000] text-lg font-bold">4.5 <i class="fa-solid fa-star fa-lg" style="color: #FFD43B;"></i></p>
+						</div>
+						<h3 class="text-2xl font-roboto-mono font-bold text-[#000000]">Mount Batur 4WD Jeep</h3>
+						<p class="text-lg font-roboto-mono font-bold text-[#000000] mt-1">From Rp 500,000</p>
+					</a> -->
+
+					<!-- Tenth Activity -->
+					<!-- <a href="BookingPage.html?id=activity10" class="activity-card block bg-white p-4 rounded-lg shadow group transition duration-300 transform hover:bg-gray-200">
+						<img src="images/ATV and Ayung Eiver Rafting.webp" alt="ATV and Ayung River Rafting" class="rounded-lg mb-4 h-60 w-full object-cover">
+						<div class="flex justify-between items-center mb-2">
+							<h3 class="text-xl font-roboto-mono font-bold text-[#000000]">Bongkasa Pertiwi, Bali</h3>
+							<p class="text-[#000000] text-lg font-bold">4.5 <i class="fa-solid fa-star fa-lg" style="color: #FFD43B;"></i></p>
+						</div>
+						<h3 class="text-2xl font-roboto-mono font-bold text-[#000000]">ATV and Ayung River Rafting</h3>
+						<p class="text-lg font-roboto-mono font-bold text-[#000000] mt-1">From Rp 997,500</p>
+					</a> -->
+
+					<!-- Eleventh Activity -->
+					<!-- <a href="BookingPage.html?id=activity11" class="activity-card block bg-white p-4 rounded-lg shadow group transition duration-300 transform hover:bg-gray-200">
+						<img src="images/Bali Parasailing Adventure.webp" alt="Bali Parasailing Adventure" class="rounded-lg mb-4 h-60 w-full object-cover">
+						<div class="flex justify-between items-center mb-2">
+							<h3 class="text-xl font-roboto-mono font-bold text-[#000000]">Tanjung Benoa, Bali</h3>
+							<p class="text-[#000000] text-lg font-bold">4.9 <i class="fa-solid fa-star fa-lg" style="color: #FFD43B;"></i></p>
+						</div>
+						<h3 class="text-2xl font-roboto-mono font-bold text-[#000000]">Bali Parasailing Adventure</h3>
+						<p class="text-lg font-roboto-mono font-bold text-[#000000] mt-1">From Rp 625,000</p>
+					</a> -->
+
+					<!-- Twelth Activity -->
+					<!-- <a href="BookingPage.html?id=activity12" class="activity-card block bg-white p-4 rounded-lg shadow group transition duration-300 transform hover:bg-gray-200">
+						<img src="images/Kecak Fire Dance Tour2.webp" alt="Kecak Fire Dance Tour" class="rounded-lg mb-4 h-60 w-full object-cover">
+						<div class="flex justify-between items-center mb-2">
+							<h3 class="text-xl font-roboto-mono font-bold text-[#000000]">Tanjung Benoa, Bali</h3>
+							<p class="text-[#000000] text-lg font-bold">4.7 <i class="fa-solid fa-star fa-lg" style="color: #FFD43B;"></i></p>
+						</div>
+						<h3 class="text-2xl font-roboto-mono font-bold text-[#000000]">Kecak Fire Dance Tour</h3>
+						<p class="text-lg font-roboto-mono font-bold text-[#000000] mt-1">From Rp 100,000</p>
+					</a> -->
+
+					<!-- Thirteenth Activity -->
+					<!-- <a href="BookingPage.html?id=activity13" class="activity-card block bg-white p-4 rounded-lg shadow group transition duration-300 transform hover:bg-gray-200">
+						<img src="images/Water Sport Experience.webp" alt="Water Sport Experience" class="rounded-lg mb-4 h-60 w-full object-cover">
+						<div class="flex justify-between items-center mb-2">
+							<h3 class="text-xl font-roboto-mono font-bold text-[#000000]">Tanjung Benoa, Bali</h3>
+							<p class="text-[#000000] text-lg font-bold">4.5 <i class="fa-solid fa-star fa-lg" style="color: #FFD43B;"></i></p>
+						</div>
+						<h3 class="text-2xl font-roboto-mono font-bold text-[#000000]">Water Sport Experience</h3>
+						<p class="text-lg font-roboto-mono font-bold text-[#000000] mt-1">From Rp 15,333</p>
+					</a> -->
+
+					<!-- Fourteenth Activity -->
+					<!-- <a href="BookingPage.html?id=activity14" class="activity-card block bg-white p-4 rounded-lg shadow group transition duration-300 transform hover:bg-gray-200">
+						<img src="images/Telaga Waja Rafting.jpg" alt="Telaga Waja Rafting" class="rounded-lg mb-4 h-60 w-full object-cover">
+						<div class="flex justify-between items-center mb-2">
+							<h3 class="text-xl font-roboto-mono font-bold text-[#000000]">Bali Tubing & Rafting, Bali</h3>
+							<p class="text-[#000000] text-lg font-bold">4.5 <i class="fa-solid fa-star fa-lg" style="color: #FFD43B;"></i></p>
+						</div>
+						<h3 class="text-2xl font-roboto-mono font-bold text-[#000000]">Telaga Waja Rafting</h3>
+						<p class="text-lg font-roboto-mono font-bold text-[#000000] mt-1">From Rp 307,500</p>
+					</a> -->
+
+					<!-- Fifteenth Activity -->
+					<!-- <a href="BookingPage.html?id=activity15" class="activity-card block bg-white p-4 rounded-lg shadow group transition duration-300 transform hover:bg-gray-200">
+						<img src="images/River Rafting Adventure in Ubud.jpg" alt="River Rafting Adventure in Ubud" class="rounded-lg mb-4 h-60 w-full object-cover">
+						<div class="flex justify-between items-center mb-2">
+							<h3 class="text-xl font-roboto-mono font-bold text-[#000000]">Ubud, Bali</h3>
+							<p class="text-[#000000] text-lg font-bold">4.5 <i class="fa-solid fa-star fa-lg" style="color: #FFD43B;"></i></p>
+						</div>
+						<h3 class="text-2xl font-roboto-mono font-bold text-[#000000]">River Rafting Adventure in Ubud</h3>
+						<p class="text-lg font-roboto-mono font-bold text-[#000000] mt-1">From Rp 239,063</p>
+					</a> -->
+
+				</div>
+			</div>
+		</section>
+
+		<!-- Best Sellers Section -->
+		<section class="py-8 bg-bg-white relative">
+			<div class="container mx-auto pt-6">
+				
+				<!-- Section Heading -->
+				<h2 class="text-4xl font-roboto font-bold uppercase ml-4">BEST SELLERS</h2>
+				
+				<!-- Carousel Container with Activities -->
+				<div id="carouselContainer" class="grid grid-cols-1 md:grid-cols-3 gap-2 pt-4 overflow-hidden">
+					<!-- First Activity -->
+					<!-- <a class="carousel-item block bg-white p-4 rounded-lg shadow group transition duration-300 transform hover:bg-gray-200">
+						<img src="images/atvride.png" alt="Activity" class="rounded-lg mb-4 h-60 w-full object-cover">
+						<div class="flex justify-between items-center mb-2">
+							<h3 class="text-xl font-roboto-mono font-bold text-[#000000]">Denpasar, Bali</h3>
+							<p class="text-[#000000] text-lg font-bold">4.9 <i class="fa-solid fa-star fa-lg" style="color: #FFD43B;"></i></p>
+						</div>
+						<h3 class="text-2xl font-roboto-mono font-bold text-[#000000]">Ubud ATV Extreme Trek</h3>
+						<p class="text-lg font-roboto-mono font-bold text-[#000000] mt-1">From Rp 425,000</p>
+					</a> -->
+
+					<a href="BookingPage.html?id=activity5" class="activity-card carousel-item block bg-white p-4 rounded-lg shadow group transition duration-300 transform hover:bg-gray-200">
+						<img src="images/atvExtremeTrek.jpeg" alt="Ubud ATV Extreme Trek" class="rounded-lg mb-4 h-60 w-full object-cover">
+						<div class="flex justify-between items-center mb-2">
+							<h3 class="text-xl font-roboto-mono font-bold text-[#000000]">Ubud, Bali</h3>
+							<p class="text-[#000000] text-lg font-bold">4.5 <i class="fa-solid fa-star fa-lg" style="color: #FFD43B;"></i></p>
+						</div>
+						<h3 class="text-2xl font-roboto-mono font-bold text-[#000000]">Ubud ATV Extreme Trek</h3>
+						<p class="text-lg font-roboto-mono font-bold text-[#000000] mt-1">From Rp 620,000</p>
+					</a>
+
+					<!-- Second Activity -->
+					<!-- <div class="carousel-item block bg-white p-4 rounded-lg shadow group transition duration-300 transform hover:bg-gray-200">
+						<img src="images/rockclimbing.png" alt="Activity" class="rounded-lg mb-4 h-60 w-full object-cover">
+						<div class="flex justify-between items-center mb-2">
+							<h3 class="text-xl font-roboto-mono font-bold text-[#000000]">Denpasar, Bali</h3>
+							<p class="text-[#000000] text-lg font-bold">4.8 <i class="fa-solid fa-star fa-lg" style="color: #FFD43B;"></i></p>
+						</div>
+						<h3 class="text-2xl font-roboto-mono font-bold text-[#000000]">Rock Climbing Experience</h3>
+						<p class="text-lg font-roboto-mono font-bold text-[#000000] mt-1">From Rp 2,200,000</p>
+					</div> -->
+
+					<a href="BookingPage.html?id=activity6" class="carousel-item activity-card block bg-white p-4 rounded-lg shadow group transition duration-300 transform hover:bg-gray-200">
+						<img src="images/rockclimbing.png" alt="Rock Climbing Experience" class="rounded-lg mb-4 h-60 w-full object-cover">
+						<div class="flex justify-between items-center mb-2">
+							<h3 class="text-xl font-roboto-mono font-bold text-[#000000]">Kuta, Bali</h3>
+							<p class="text-[#000000] text-lg font-bold">4.9 <i class="fa-solid fa-star fa-lg" style="color: #FFD43B;"></i></p>
+						</div>
+						<h3 class="text-2xl font-roboto-mono font-bold text-[#000000]">Rock Climbing Experience</h3>
+						<p class="text-lg font-roboto-mono font-bold text-[#000000] mt-1">From Rp 1,100,000</p>
+					</a>
+
+					<!-- Third Activity -->
+					<!-- <div class="carousel-item block bg-white p-4 rounded-lg shadow group transition duration-300 transform hover:bg-gray-200">
+						<img src="images/skydiving.png" alt="Activity" class="rounded-lg mb-4 h-60 w-full object-cover">
+						<div class="flex justify-between items-center mb-2">
+							<h3 class="text-xl font-roboto-mono font-bold text-[#000000]">Denpasar, Bali</h3>
+							<p class="text-[#000000] text-lg font-bold">4.8 <i class="fa-solid fa-star fa-lg" style="color: #FFD43B;"></i></p>
+						</div>
+						<h3 class="text-2xl font-roboto-mono font-bold text-[#000000]">Annual Bali Skydiving</h3>
+						<p class="text-lg font-roboto-mono font-bold text-[#000000] mt-1">From Rp 20,000,000</p>
+					</div> -->
+
+					<a href="BookingPage.html?id=activity7" class="carousel-item activity-card block bg-white p-4 rounded-lg shadow group transition duration-300 transform hover:bg-gray-200">
+						<img src="images/skydiving.png" alt="Annual Bali Skydiving" class="rounded-lg mb-4 h-60 w-full object-cover">
+						<div class="flex justify-between items-center mb-2">
+							<h3 class="text-xl font-roboto-mono font-bold text-[#000000]">Kuta, Bali</h3>
+							<p class="text-[#000000] text-lg font-bold">4.7 <i class="fa-solid fa-star fa-lg" style="color: #FFD43B;"></i></p>
+						</div>
+						<h3 class="text-2xl font-roboto-mono font-bold text-[#000000]">Annual Bali Skydiving</h3>
+						<p class="text-lg font-roboto-mono font-bold text-[#000000] mt-1">From Rp 20,000,000</p>
+					</a>
+
+					<!-- Fourth Activity -->
+					<!-- <div class="carousel-item block bg-white p-4 rounded-lg shadow group transition duration-300 transform hover:bg-gray-200">
+						<img src="images/atvride.png" alt="Activity" class="rounded-lg mb-4 h-60 w-full object-cover">
+						<div class="flex justify-between items-center mb-2">
+							<h3 class="text-xl font-roboto-mono font-bold text-[#000000]">Denpasar, Bali</h3>
+							<p class="text-[#000000] text-lg font-bold">4.9 <i class="fa-solid fa-star fa-lg" style="color: #FFD43B;"></i></p>
+						</div>
+						<h3 class="text-2xl font-roboto-mono font-bold text-[#000000]">Ubud ATV Extreme Trek</h3>
+						<p class="text-lg font-roboto-mono font-bold text-[#000000] mt-1">From Rp 425,000</p>
+					</div> -->
+
+					<a href="BookingPage.html?id=activity11" class="carousel-item activity-card block bg-white p-4 rounded-lg shadow group transition duration-300 transform hover:bg-gray-200">
+						<img src="images/Bali Parasailing Adventure.webp" alt="Bali Parasailing Adventure" class="rounded-lg mb-4 h-60 w-full object-cover">
+						<div class="flex justify-between items-center mb-2">
+							<h3 class="text-xl font-roboto-mono font-bold text-[#000000]">Tanjung Benoa, Bali</h3>
+							<p class="text-[#000000] text-lg font-bold">4.9 <i class="fa-solid fa-star fa-lg" style="color: #FFD43B;"></i></p>
+						</div>
+						<h3 class="text-2xl font-roboto-mono font-bold text-[#000000]">Bali Parasailing Adventure</h3>
+						<p class="text-lg font-roboto-mono font-bold text-[#000000] mt-1">From Rp 625,000</p>
+					</a>
+
+					<!-- Fifth Activity -->
+					<!-- <div class="carousel-item block bg-white p-4 rounded-lg shadow group transition duration-300 transform hover:bg-gray-200">
+						<img src="images/skydiving.png" alt="Activity" class="rounded-lg mb-4 h-60 w-full object-cover">
+						<div class="flex justify-between items-center mb-2">
+							<h3 class="text-xl font-roboto-mono font-bold text-[#000000]">Denpasar, Bali</h3>
+							<p class="text-[#000000] text-lg font-bold">4.8 <i class="fa-solid fa-star fa-lg" style="color: #FFD43B;"></i></p>
+						</div>
+						<h3 class="text-2xl font-roboto-mono font-bold text-[#000000]">Annual Bali Skydiving</h3>
+						<p class="text-lg font-roboto-mono font-bold text-[#000000] mt-1">From Rp 20,000,000</p>
+					</div> -->
+
+					<a href="BookingPage.html?id=activity14" class="carousel-item activity-card block bg-white p-4 rounded-lg shadow group transition duration-300 transform hover:bg-gray-200">
+						<img src="images/Telaga Waja Rafting.jpg" alt="Telaga Waja Rafting" class="rounded-lg mb-4 h-60 w-full object-cover">
+						<div class="flex justify-between items-center mb-2">
+							<h3 class="text-xl font-roboto-mono font-bold text-[#000000]">Bali Tubing & Rafting, Bali</h3>
+							<p class="text-[#000000] text-lg font-bold">4.5 <i class="fa-solid fa-star fa-lg" style="color: #FFD43B;"></i></p>
+						</div>
+						<h3 class="text-2xl font-roboto-mono font-bold text-[#000000]">Telaga Waja Rafting</h3>
+						<p class="text-lg font-roboto-mono font-bold text-[#000000] mt-1">From Rp 307,500</p>
+					</a>
+
+					<!-- Sixth Activity -->
+					<!-- <div class="carousel-item block bg-white p-4 rounded-lg shadow group transition duration-300 transform hover:bg-gray-200">
+						<img src="images/rockclimbing.png" alt="Activity" class="rounded-lg mb-4 h-60 w-full object-cover">
+						<div class="flex justify-between items-center mb-2">
+							<h3 class="text-xl font-roboto-mono font-bold text-[#000000]">Denpasar, Bali</h3>
+							<p class="text-[#000000] text-lg font-bold">4.8 <i class="fa-solid fa-star fa-lg" style="color: #FFD43B;"></i></p>
+						</div>
+						<h3 class="text-2xl font-roboto-mono font-bold text-[#000000]">Rock Climbing Experience</h3>
+						<p class="text-lg font-roboto-mono font-bold text-[#000000] mt-1">From Rp 2,200,000</p>
+					</div> -->
+
+					<a href="BookingPage.html?id=activity12" class="carousel-item activity-card block bg-white p-4 rounded-lg shadow group transition duration-300 transform hover:bg-gray-200">
+						<img src="images/Kecak Fire Dance Tour2.webp" alt="Kecak Fire Dance Tour" class="rounded-lg mb-4 h-60 w-full object-cover">
+						<div class="flex justify-between items-center mb-2">
+							<h3 class="text-xl font-roboto-mono font-bold text-[#000000]">Tanjung Benoa, Bali</h3>
+							<p class="text-[#000000] text-lg font-bold">4.7 <i class="fa-solid fa-star fa-lg" style="color: #FFD43B;"></i></p>
+						</div>
+						<h3 class="text-2xl font-roboto-mono font-bold text-[#000000]">Kecak Fire Dance Tour</h3>
+						<p class="text-lg font-roboto-mono font-bold text-[#000000] mt-1">From Rp 100,000</p>
+					</a>
+
+				</div>
+
+				<!-- Navigation Buttons -->
+				<button id="carouselPrev" class="absolute top-1/2 left-2 transform -translate-y-1/2 rounded-full bg-[#9A040F] text-white ml-4 p-2 px-4 hover:bg-[#740b21]">
+					<i class="fas fa-chevron-left text-xl"></i>
+				</button>
+				<button id="carouselNext" class="absolute top-1/2 right-2 transform -translate-y-1/2 rounded-full bg-[#9A040F] text-white mr-4 p-2 px-4 hover:bg-[#740b21]">
+					<i class="fas fa-chevron-right text-xl"></i>
+				</button>
+			</div>
+		</section>
+
+		<!-- FAQ and Shoutbox Section -->
+		<section class="px-6 py-12">
+		  <h2 class="text-4xl font-roboto font-bold uppercase ml-4 mb-6">FREQUENTLY ASKED QUESTIONS (FAQ)</h2>
+		  
+		  <!-- Container for FAQ and Shoutbox -->
+		  <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 ml-4 mr-6">
+
+			<!-- FAQ Section -->
+			<div class="lg:col-span-2 space-y-4">
+			  <!-- FAQ 1 -->
+			  <div class="bg-[#212121] text-white text-xl rounded-lg p-8 hover:bg-[#0f0f0f] transition duration-200">
+				<div class="flex justify-between items-center">
+				  <!-- Question Area -->
+				  <div class="w-10/12">
+					<span>I’m unsure about the place. How can I chat with the host before booking?</span>
+				  </div>
+				  <!-- Button Area -->
+				  <div class="w-2/12 flex justify-end">
+					<button class="w-10 h-10 bg-black text-red-500 rounded-full flex items-center justify-center hover:bg-gray-500 transition duration-200" onclick="toggleFAQ(1)">
+					  <span id="plusMinus1">+</span>
+					</button>
+				  </div>
+				</div>
+				<div id="faq1" class="faq-answer hidden">
+				  <p class="text-[#b3b3b3] mt-4">You need to create an account in order to chat with the host. If you've logged in, click on the booking page, then chat with the host.</p>
+				</div>
+			  </div>
+
+			  <!-- FAQ 2 -->
+			  <div class="bg-[#212121] text-white text-xl rounded-lg p-8 hover:bg-[#0f0f0f] transition duration-200">
+				<div class="flex justify-between items-center">
+				  <!-- Question Area -->
+				  <div class="w-10/12">
+					<span>How will I receive confirmation of my booking?</span>
+				  </div>
+				  <!-- Button Area -->
+				  <div class="w-2/12 flex justify-end">
+					<button class="w-10 h-10 bg-black text-red-500 rounded-full flex items-center justify-center hover:bg-gray-500 transition duration-200" onclick="toggleFAQ(2)">
+					  <span id="plusMinus2">+</span>
+					</button>
+				  </div>
+				</div>
+				<div id="faq2" class="faq-answer hidden">
+				  <p class="text-[#b3b3b3] mt-4">You will receive an invoice after payment. You can also check your invoice on profile.</p>
+				</div>
+			  </div>
+
+			  <!-- FAQ 3 -->
+			  <div class="bg-[#212121] text-white text-xl rounded-lg p-8 hover:bg-[#0f0f0f] transition duration-200">
+				<div class="flex justify-between items-center">
+				  <!-- Question Area -->
+				  <div class="w-10/12">
+					<span>How to post photos or videos on ThrillX?</span>
+				  </div>
+				  <!-- Button Area -->
+				  <div class="w-2/12 flex justify-end">
+					<button class="w-10 h-10 bg-black text-red-500 rounded-full flex items-center justify-center hover:bg-gray-500 transition duration-200" onclick="toggleFAQ(3)">
+					  <span id="plusMinus3">+</span>
+					</button>
+				  </div>
+				</div>
+				<div id="faq3" class="faq-answer hidden">
+				  <p class="text-[#b3b3b3] mt-4">You need to create an account first before posting anything.</p>
+				</div>
+			  </div>
+
+			  <!-- FAQ 4 -->
+			  <div class="bg-[#212121] text-white text-xl rounded-lg p-8 hover:bg-[#0f0f0f] transition duration-200">
+				<div class="flex justify-between items-center">
+				  <!-- Question Area -->
+				  <div class="w-10/12">
+					<span>Why can't I join a community?</span>
+				  </div>
+				  <!-- Button Area -->
+				  <div class="w-2/12 flex justify-end">
+					<button class="w-10 h-10 bg-black text-red-500 rounded-full flex items-center justify-center hover:bg-gray-500 transition duration-200" onclick="toggleFAQ(4)">
+					  <span id="plusMinus4">+</span>
+					</button>
+				  </div>
+				</div>
+				<div id="faq4" class="faq-answer hidden">
+				  <p class="text-[#b3b3b3] mt-4">You need to create an account in order to join a community. Some communities are private and some are public. You need to send a request to join the private one.</p>
+				</div>
+			  </div>
+			</div>
+
+		<!-- Shoutbox Section -->
+		<div class="lg:col-span-1 bg-[#212121] text-white rounded-lg p-8" style="height: 630px;">
+		  <h3 class="text-3xl font-roboto-mono font-bold uppercase mt-4 mb-8">ASK YOUR QUESTION</h3>
+		  <form>
+			<label for="name" class="block text-[#A61E28] font-roboto-mono text-xl uppercase font-bold mb-2">NAME</label>
+			<input id="name" type="text" class="w-full p-4 mb-6 bg-black text-white rounded" placeholder="Enter your name" required>
+
+			<label for="email" class="block text-[#A61E28] font-roboto-mono text-xl uppercase font-bold mb-2">Email</label>
+			<input id="email" type="email" class="w-full p-4 mb-6 bg-black text-white rounded" placeholder="Enter your email" required>
+
+			<label for="question" class="block text-[#A61E28] font-roboto-mono text-xl uppercase font-bold mb-2">Your Question</label>
+			<textarea id="question" class="w-full p-4 mb-6 bg-black text-white rounded" rows="4" placeholder="Enter your question" required></textarea>
+
+			<button type="submit" class="w-full text-xl bg-[#A61E28] font-roboto-mono p-4 rounded">SEND YOUR MESSAGE</button>
+		  </form>
+		</div>
+	  </div>
+	</section>
+
+	<!-- Footer -->
+	<footer class="bg-[#212121] text-white py-8 px-12">
+		<div class="container mx-auto flex flex-col md:flex-row justify-between items-start space-y-6 md:space-y-0">
+			<!-- Logo and Description -->
+			<div class="flex flex-col items-start space-y-4 md:w-1/2">
+				<img src="icons/ThrillX Logo.png" alt="ThrillX Logo" class="h-12">
+				<p class="text-sm font-roboto text-justify">
+					THRILLX is a platform for users to book extreme sports or extreme attraction places specifically in Indonesia 
+					and create a social media for users to interact with each other by sharing their experiences through pictures or videos. 
+					By exploring through the pictures and videos shared online, they can also find and join a community based on their interests.
+				</p>
+			</div>
+
+			<!-- Explore More and Payment Channels -->
+			<div class="flex flex-row justify-between">
+				<div class="flex flex-col mr-10 pr-4">
+					<!-- Explore More -->
+					<div class="flex flex-col text-left w-50 pr-10 mr-10">
+						<h4 class="font-roboto text-lg uppercase text-[#9a0c0c]">Explore More</h4>
+						<a href="#" class="text-large font-roboto mt-2 pt-2 pb-2 text-white hover:text-[#9a0c0c]">Support</a>
+						<a href="#" class="text-large font-roboto mt-2 text-white hover:text-[#9a0c0c]">Partnership</a>
+					</div>
+				</div>
+
+				<!-- Payment Channels -->
+				<div class="flex flex-col">
+					<h4 class="font-roboto text-lg uppercase text-[#9a0c0c]">Payment Channels</h4>
+					<div class="grid grid-cols-4 gap-1 mr-10 mt-2">
+						<img src="icons/paypal.png" alt="PayPal" class="w-12">
+						<img src="icons/visa.png" alt="Visa" class="w-12">
+						<img src="icons/mastercard.png" alt="MasterCard" class="w-12">
+						<img src="icons/skrill.png" alt="Skrill" class="w-12">
+						<img src="icons/ebay.png" alt="eBay" class="w-12">
+						<img src="icons/discover.png" alt="Discover" class="w-12">
+						<img src="icons/maestro.png" alt="Maestro" class="w-12">
+						<img src="icons/solo.png" alt="Solo" class="w-12">
+						<img src="icons/cirrus.png" alt="Cirrus" class="w-12">
+						<img src="icons/2checkout.png" alt="2Checkout" class="w-12">
+						<img src="icons/western-union.png" alt="Western Union" class="w-12">
+						<img src="icons/google-wallet.png" alt="Google Wallet" class="w-12">
+					</div>
+				</div>
+			</div>
+		</div>
+	</footer>
+	
+
+<script type="module" src="SessionTimeout.js"></script>
+<script type="module" src="LandingPage.js"></script>
+<!-- <script src="filterLandingPage.js"></script> -->
+<!-- <script src="filterByPriceLanding.js"></script> -->
+<script type="module" src="inputFilter.js"></script>
+<script type="module" src="landingPageActivityContainer.js"></script>
+
+<script type="text/javascript">
+	window.history.forward();
+	function noBack() {
+		window.history.forward();
+	}
+</script>
+<script>
+    // Get the button for scrolling to the top
+    const scrollToTopButton = document.getElementById('scrollToTopButton');
+
+    // Show or hide the scroll to top button based on scroll position
+    window.onscroll = function () {
+        if (document.body.scrollTop > 700 || document.documentElement.scrollTop > 700) {
+            scrollToTopButton.classList.remove('hidden');
+            scrollToTopButton.classList.add('block');
+            scrollToTopButton.classList.remove('opacity-0');
+            scrollToTopButton.classList.add('opacity-100');
+        } else {
+            scrollToTopButton.classList.add('hidden');
+            scrollToTopButton.classList.remove('block');
+            scrollToTopButton.classList.add('opacity-0');
+            scrollToTopButton.classList.remove('opacity-100');
+        }
+    };
+
+    // Scroll to top
+    scrollToTopButton.addEventListener('click', function () {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+	
+	// Carousel Navigation
+	const carouselItems = Array.from(document.querySelectorAll('.carousel-item'));
+	const prevButton = document.getElementById('carouselPrev');
+	const nextButton = document.getElementById('carouselNext');
+	let startIndex = 0;
+
+	function updateCarousel() {
+		// Hide all items initially
+		carouselItems.forEach((item) => item.classList.add('hidden'));
+		
+		// Show the next three items based on startIndex
+		for (let i = 0; i < 3; i++) {
+			const itemIndex = (startIndex + i) % carouselItems.length;
+			carouselItems[itemIndex].classList.remove('hidden');
+		}
+	}
+
+	// Move to previous set of three items
+	prevButton.addEventListener('click', () => {
+		startIndex = (startIndex - 3 + carouselItems.length) % carouselItems.length;
+		updateCarousel();
+	});
+
+	// Move to next set of three items
+	nextButton.addEventListener('click', () => {
+		startIndex = (startIndex + 3) % carouselItems.length;
+		updateCarousel();
+	});
+
+	// Initialize the carousel with the first three items visible
+	updateCarousel();
+
+	// Account dropdown
+	document.getElementById('accountDropdownButton').addEventListener('click', function() {
+        const dropdownMenu = document.getElementById('accountDropdownMenu');
+        dropdownMenu.classList.toggle('hidden');
+    });
+
+    // Hide dropdown if clicked outside
+    document.addEventListener('click', function(event) {
+        const isClickInside = document.getElementById('accountDropdownButton').contains(event.target) ||
+            document.getElementById('accountDropdownMenu').contains(event.target);
+        if (!isClickInside) {
+            document.getElementById('accountDropdownMenu').classList.add('hidden');
+        }
+    });
+
+    // Get elements for dropdown functionality
+    const dropdownButton = document.getElementById('dropdownButton');
+    const dropdownMenu = document.getElementById('dropdownMenu');
+    const dropdownLinks = dropdownMenu.querySelectorAll('a');
+
+
+    // Toggle dropdown visibility
+    dropdownButton.addEventListener('click', () => {
+        dropdownMenu.classList.toggle('hidden');
+    });
+
+    // When an option is clicked
+    dropdownLinks.forEach(link => {
+        link.addEventListener('click', (event) => {
+            event.preventDefault();
+
+            const selectedText = event.target.textContent;
+            dropdownButton.innerHTML = `${selectedText} <i class="fas fa-chevron-down ml-2"></i>`;
+
+            // Hide dropdown menu
+            dropdownMenu.classList.add('hidden');
+        });
+    });
+
+    // Hide dropdown if clicked outside
+    window.addEventListener('click', (event) => {
+        if (!dropdownButton.contains(event.target)) {
+            dropdownMenu.classList.add('hidden');
+        }
+    });
+    
+    // Toggle FAQ visibility
+    function toggleFAQ(faqNumber) {
+        const faq = document.getElementById(`faq${faqNumber}`);
+        const plusMinus = document.getElementById(`plusMinus${faqNumber}`);
+
+        faq.classList.toggle('hidden'); // Toggle hidden class
+        
+        // Toggle between + and - 
+        if (faq.classList.contains('hidden')) {
+            plusMinus.innerHTML = "+";
+        } else {
+            plusMinus.innerHTML = "-";
+        }
+    }
+	
+</script>
+	
+</body>
+</html>
+

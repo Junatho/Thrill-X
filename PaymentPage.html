@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ThrillX Shopping Cart</title>
+	  <link rel="icon" type="image/x-icon" href="icons/ThrillX Logo.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="sessionTimeout.js"></script>
+    <script src="confirmPayment.js"></script>
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        .font-bebas {
+            font-family: 'Bebas Neue', sans-serif;
+        }
+        .font-roboto {
+            font-family: 'Roboto', sans-serif;
+        }
+        .font-roboto-mono {
+            font-family: 'Roboto Mono', monospace;
+        }
+        .hide-date-icon::-webkit-calendar-picker-indicator {
+            display: none;
+        }
+        .hide-date-icon {
+            -webkit-appearance: none;
+            appearance: none;
+        }
+    </style>
+</head>
+
+	<!-- Scroll to Top Button -->
+    <button id="scrollToTopButton" class="fixed bottom-1 right-1 bg-[#A61E28] text-white rounded-full px-3 py-2 shadow-lg hidden transition-opacity duration-300 ease-in-out opacity-0 hover:opacity-100 z-50">
+        <i class="fas fa-arrow-up-from-bracket"></i>
+    </button>
+    
+    <!-- Navbar -->
+    <nav id="navbar" class="navbar bg-[#000000] p-4 fixed top-0 w-full z-50 transition-transform duration-300">
+      <div class="container mx-auto flex items-center justify-between">
+          <div class="flex items-center space-x-4">
+            <a href="LandingPage.html">
+              <img src="icons/ThrillX Logo.png" alt="ThrillX Logo" class="h-16">
+            </a>
+              <select class="bg-[#000000] text-white py-1 px-3 rounded-xl text-xl font-roboto-mono">
+                  <option value="idr">IDR</option>
+                  <option value="usd">USD</option>
+                  <option value="eur">EUR</option>
+                  <option value="gbp">GBP</option>
+              </select>
+          </div>
+          
+        <!-- Links -->
+        <div class="flex flex-1 pr-12 justify-center items-center space-x-8">
+          <a href="LandingPage.html" class="text-[#9A040F] hover:text-[#9A040F] text-xl font-roboto-mono tracking-wider hidden lg:block">ACTIVITIES</a>
+          <div class="inline-block h-10 w-0.5 bg-[#919191] mx-4 hidden lg:block"></div>
+          <a href="#" class="text-[#919191] hover:text-gray-100 text-xl font-roboto-mono tracking-wider hidden lg:block">EXPLORE</a>
+          <div class="inline-block h-10 w-0.5 bg-[#919191] mx-4 hidden lg:block"></div>
+          
+          <!-- Dropdown Wrapper for ACCOUNT -->
+          <div class="relative inline-block text-left">
+            <button id="accountDropdownButton" type="button" class="text-[#919191] hover:text-gray-100 text-xl font-roboto-mono tracking-wider hidden lg:block focus:outline-none">
+              ACCOUNT
+            </button>
+            
+            <!-- Dropdown Menu -->
+            <div id="accountDropdownMenu" class="origin-top-right absolute right-0 mt-2 w-56 rounded-lg shadow-lg bg-white ring-1 ring-black ring-opacity-5 hidden">
+              <div class="px-4 py-2 text-gray-700">
+                <p class="font-bold font-roboto">Username</p>
+                <p class="font-medium font-roboto">user@example.com</p>
+              </div>
+              <hr class="border-gray-300">
+              <a href="LogoutLandingPage.html" class="font-roboto block px-4 py-2 text-gray-700 hover:bg-[#A61E28] hover:text-white rounded-b-lg text-center font-semibold">
+                Logout
+              </a>
+            </div>
+          </div>
+        </div>
+          
+          <!-- Help and Cart -->
+          <div class="flex items-center space-x-4">
+      <a href="#" class="text-[#919191] hover:text-gray-100 text-xl font-roboto-mono">HELP</a>
+      <div class="inline-block h-10 w-0.5 bg-[#919191] mx-4"></div>
+      <a href="ShoppingCart.html" class="bg-white text-gray-500 hover:bg-[#6b0c0c] hover:text-white uppercase py-1 px-3 rounded-xl text-xl font-roboto-mono">CART</a>
+    </div>
+      </div>
+  </nav>
+    
+      <!-- Scroll to Top Button -->
+      <button id="scrollToTopButton" class="fixed bottom-1 right-1 bg-[#A61E28] text-white rounded-xl px-3 py-2 shadow-lg hidden transition-opacity duration-300 ease-in-out opacity-0 hover:opacity-100 z-50">
+        <i class="fas fa-arrow-up-from-bracket"></i>
+      </button>
+
+    <body class="bg-white font-roboto-mono">
+
+      <!--SECTION 1: Shopping Cart Header -->
+      <section class="px-6 pt-36 pb-6 pl-12 relative mx-auto">
+        <a href="BookingPage.html" class="font-roboto-mono inline-flex items-center text-black hover:text-[#740b21]">
+            <span><i class="fa-solid fa-arrow-left fa-lg"></i></span>
+            <span class="ml-2">Continue Shopping</span>
+        </a>
+      </section>
+      
+        <!--SECTION 2: Progress Tracker-->
+        <section> 
+          <div class="pl-40 pr-40 flex justify-between items-center">
+            <!-- Cart Step - Active -->
+            <div class="flex flex-col items-center space-y-2">
+                <span class="font-roboto-mono text-[#A61E28]">Cart</span>
+                <div class="w-8 h-8 flex justify-center items-center bg-[#A61E28] text-white rounded-full">1</div>
+            </div>
+            <div class="flex-1 h-1 bg-[#A61E28] mx-2"></div>
+
+            <!-- Payment Step - Inactive -->
+            <div class="flex flex-col items-center space-y-2">
+                <span class="font-roboto-mono text-[#A61E28]">Payment</span>
+                <div class="w-8 h-8 flex justify-center items-center bg-[#A61E28] text-white rounded-full">2</div>
+            </div>
+            <div class="flex-1 h-1 bg-gray-300 mx-2"></div>
+
+            <!-- Receipt Step - Inactive -->
+            <div class="flex flex-col items-center space-y-2">
+                <span class="font-roboto-mono text-gray-500">Receipt</span>
+                <div class="w-8 h-8 flex justify-center items-center bg-gray-300 text-white rounded-full">3</div>
+            </div>
+          </div>
+        </section>    
+
+<!-- SECTION 3: Shopping Cart Items -->
+<section class="px-6 py-6">
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 ml-4 mr-6">
+    <!-- Left Column (Form Layout) -->
+    <div class="lg:col-span-2 space-y-4">
+      <div class="bg-white p-6 rounded border-2">
+
+        <!-- Contact Information Section -->
+        <div class="space-y-4">
+          <h2 class="text-2xl font-bold text-[#9A040F]">Contact Information</h2>
+
+          <!-- First Name and Last Name -->
+          <div class="flex space-x-4">
+            <div class="w-1/2">
+              <label for="first-name" class="block text-sm font-medium">
+                First Name <span class="text-red-600">*</span>
+              </label>
+              <input type="text" id="first-name" class="w-full mt-1 p-2 border rounded" placeholder="First Name" required>
+            </div>
+            <div class="w-1/2">
+              <label for="last-name" class="block text-sm font-medium">
+                Last Name <span class="text-red-600">*</span>
+              </label>
+              <input type="text" id="last-name" class="w-full mt-1 p-2 border rounded" placeholder="Last Name" required>
+            </div>
+          </div>
+
+          <!-- Phone Number -->
+          <div>
+            <label for="phone-number" class="block text-sm font-medium">
+              Phone Number <span class="text-red-600">*</span>
+            </label>
+            <input type="tel" id="phone-number" class="w-full mt-1 p-2 border rounded" placeholder="Phone Number" required>
+          </div>
+
+          <!-- Email Address -->
+          <div>
+            <label for="email" class="block text-sm font-medium">
+              Email Address <span class="text-red-600">*</span>
+            </label>
+            <input type="email" id="email" class="w-full mt-1 p-2 border rounded" placeholder="Email Address" required>
+          </div>
+
+          <hr class="my-4">
+
+          <!-- Payment Method Section -->
+          <h2 class="text-2xl font-bold text-[#9A040F]">
+            Payment Method <span class="text-red-600">*</span>
+          </h2>
+
+          <!-- Payment Methods -->
+          <div class="space-y-2">
+            <div>
+              <label class="inline-flex items-center">
+                <input type="radio" id="credit-card" name="payment-method" class="text-[#A61E28]" required>
+                <span class="ml-2">Credit/Debit Card</span>
+              </label>
+            </div>
+            <div>
+              <label class="inline-flex items-center">
+                <input type="radio" id="virtual-account" name="payment-method" class="text-[#A61E28]" required>
+                <span class="ml-2">Virtual Account</span>
+              </label>
+            </div>
+            <div>
+              <label class="inline-flex items-center">
+                <input type="radio" id="bank-transfer" name="payment-method" class="text-[#A61E28]" required>
+                <span class="ml-2">Bank Transfer</span>
+              </label>
+            </div>
+          </div>
+
+          <hr class="my-4">
+
+          <!-- Card Number and Expiration Date -->
+          <div class="space-y-4">
+            <div>
+              <label for="card-number" class="block text-sm font-medium">
+                Card Number <span class="text-red-600">*</span>
+              </label>
+              <input type="text" id="card-number" class="w-full mt-1 p-2 border rounded" placeholder="1234-1234-1234" required>
+            </div>
+            <div class="flex space-x-4">
+              <div class="w-1/2">
+                <label for="expiration-date" class="block text-sm font-medium">
+                  Expiration Date <span class="text-red-600">*</span>
+                </label>
+                <input type="text" id="expiration-date" class="w-full mt-1 p-2 border rounded" placeholder="MM/YY" required>
+              </div>
+              <div class="w-1/2">
+                <label for="cvc" class="block text-sm font-medium">
+                  CVC <span class="text-red-600">*</span>
+                </label>
+                <input type="text" id="cvc" class="w-full mt-1 p-2 border rounded" placeholder="CVC" required>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pay Button -->
+        <div class="flex justify-center mt-6">
+          <button id="pay-button" type="button" class="bg-[#9A040F] w-full text-white font-medium font-roboto-mono text-lg py-3 px-6 rounded-lg hover:bg-[#5c0006] transition-colors duration-300" disabled>
+            Pay Now
+          </button>
+        </div>
+      </div>
+    </div>
+        
+<!-- Right Column (Voucher and Checkout) -->
+<div class="space-y-4">
+  <div class="bg-white p-6 rounded-lg border-2">
+
+      <!-- Order Summary Header -->
+      <h2 class="font-semibold text-xl mb-4 text-[#9A040F]">Order Summary</h2>
+
+      <div id="orderSummaryPopulate">
+        <!-- Cart Item 1 -->
+        <!-- <div class="flex items-start space-x-4 py-4">
+            <img src="images/flyboard.png" alt="Fly Board Experience" class="w-20 h-20 object-cover rounded">
+            <div>
+                <h3 class="font-roboto-mono text-lg font-bold">Fly Board Experience</h3>
+            </div>
+            <h3 class="font-semibold text-lg text-right w-full">Rp 1.200.000</h3>
+        </div>
+          <p class="text-black text-sm">
+            <i class="fa fa-location-dot mr-1"></i>Tanjung Benoa
+          </p>
+          <p class="text-red-700 text-sm flex items-center">
+              <i class="fa fa-user mr-1"></i> 2 Person(s)
+          </p>
+          <p class="text-red-700 text-sm flex items-center">
+              <i class="fa fa-clock mr-1"></i> 15:00 WIB
+          </p>
+          <p class="text-red-700 text-sm flex items-center">
+              <i class="fa fa-calendar-alt mr-1"></i> Thu, 04 Dec 2022
+          </p>
+
+        <hr class="my-4"> -->
+
+        
+
+        <!-- Cart Item 2 -->
+        <!-- <div class="flex items-start space-x-4 py-4">
+          <img src="images/jetski.png" alt="Fun Jet Ski and Water Sport" class="w-20 h-20 object-cover rounded">
+          <div>
+              <h3 class="font-roboto-mono text-lg font-bold">Fun Jet Ski and Water Sport</h3>
+          </div>
+          <h3 class="font-semibold text-lg text-right w-full">Rp 1.200.000</h3>
+        </div>
+        <p class="text-black text-sm">
+          <i class="fa fa-location-dot mr-1"></i>Tanjung Benoa
+        </p>
+        <p class="text-red-700 text-sm flex items-center">
+            <i class="fa fa-user mr-1"></i> 4 Person(s)
+        </p>
+        <p class="text-red-700 text-sm flex items-center">
+            <i class="fa fa-clock mr-1"></i> 15:00 WIB
+        </p>
+        <p class="text-red-700 text-sm flex items-center">
+            <i class="fa fa-calendar-alt mr-1"></i> Fri, 23 Dec 2022
+        </p>
+
+        <hr class="my-4"> -->
+
+        <!-- Cart Item 3 -->
+        <!-- <div class="flex items-start space-x-4 py-4">
+          <img src="images/5gx.png" alt="5GX Bali" class="w-20 h-20 object-cover rounded">
+          <div>
+              <h3 class="font-roboto-mono text-lg font-bold">5GX Bali</h3>
+          </div>
+          <h3 class="font-semibold text-lg text-right w-full">Rp 200.000</h3>
+        </div>
+        <p class="text-black text-sm">
+          <i class="fa fa-location-dot mr-1"></i>Tanjung Benoa
+        </p>
+        <p class="text-red-700 text-sm flex items-center">
+            <i class="fa fa-user mr-1"></i> 1 Person(s)
+        </p>
+        <p class="text-red-700 text-sm flex items-center">
+            <i class="fa fa-clock mr-1"></i> 15:00 WIB
+        </p>
+        <p class="text-red-700 text-sm flex items-center">
+            <i class="fa fa-calendar-alt mr-1"></i> Mon, 10 Jan 2023
+        </p>
+
+        <hr class="my-4"> -->
+      </div>
+
+      <!-- Tax 10% -->
+      <div class="flex justify-between py-2 mt-4">
+          <h3 class="font-medium text-lg">Tax 10%</h3>
+          <span id="taxField" class="font-bold text-lg">Rp 0</span>
+      </div>
+
+      <hr class="my-4">
+
+      <!-- Subtotal -->
+      <div class="flex justify-between py-2">
+          <h3 class="font-medium text-lg">Subtotal</h3>
+          <span id="subTotalField" class="font-bold text-lg">Rp 0</span>
+      </div>
+
+      <hr class="my-4">
+
+      <!-- Total -->
+      <div class="flex justify-between py-2">
+          <h2 class="font-semibold text-xl">Total</h2>
+          <span id="totalField" class="font-bold text-xl">Rp 0</span>
+      </div>
+
+  </div>
+</div>
+
+
+      </div>
+  </section>
+  
+
+
+        <!-- Footer -->
+        <footer class="bg-[#212121] text-white py-8 px-12">
+            <div class="container mx-auto flex flex-col md:flex-row justify-between items-start space-y-6 md:space-y-0">
+                <!-- Logo and Description -->
+                <div class="flex flex-col items-start space-y-4 md:w-1/2">
+                    <img src="icons/ThrillX Logo.png" alt="ThrillX Logo" class="h-12">
+                    <p class="text-sm font-roboto text-justify">
+                        THRILLX is a platform for users to book extreme sports or extreme attraction places specifically in Indonesia 
+                        and create a social media for users to interact with each other by sharing their experiences through pictures or videos. 
+                        By exploring through the pictures and videos shared online, they can also find and join a community based on their interests.
+                    </p>
+                </div>
+
+                <!-- Explore More and Payment Channels -->
+                <div class="flex flex-row justify-between">
+                    <div class="flex flex-col mr-10 pr-4">
+                        <!-- Explore More -->
+                        <div class="flex flex-col text-left w-50 pr-10 mr-10">
+                            <h4 class="font-roboto text-lg uppercase text-[#9a0c0c]">Explore More</h4>
+                            <a href="#" class="text-large font-roboto mt-2 pt-2 pb-2 text-white hover:text-[#9a0c0c]">Support</a>
+                            <a href="#" class="text-large font-roboto mt-2 text-white hover:text-[#9a0c0c]">Partnership</a>
+                        </div>
+                    </div>
+
+                    <!-- Payment Channels -->
+                    <div class="flex flex-col">
+                        <h4 class="font-roboto text-lg uppercase text-[#9a0c0c]">Payment Channels</h4>
+                        <div class="grid grid-cols-4 gap-1 mr-10 mt-2">
+                            <img src="icons/paypal.png" alt="PayPal" class="w-12">
+                            <img src="icons/visa.png" alt="Visa" class="w-12">
+                            <img src="icons/mastercard.png" alt="MasterCard" class="w-12">
+                            <img src="icons/skrill.png" alt="Skrill" class="w-12">
+                            <img src="icons/ebay.png" alt="eBay" class="w-12">
+                            <img src="icons/discover.png" alt="Discover" class="w-12">
+                            <img src="icons/maestro.png" alt="Maestro" class="w-12">
+                            <img src="icons/solo.png" alt="Solo" class="w-12">
+                            <img src="icons/cirrus.png" alt="Cirrus" class="w-12">
+                            <img src="icons/2checkout.png" alt="2Checkout" class="w-12">
+                            <img src="icons/western-union.png" alt="Western Union" class="w-12">
+                            <img src="icons/google-wallet.png" alt="Google Wallet" class="w-12">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    
+
+    <script type="module" src="SessionTimeout.js"></script>    
+    <script type="module" src="orderSummaryPaymentPage.js"></script>
+
+    <script>
+      const prices = {
+        item1: 1200000,
+        item2: 600000
+      };
+
+      let selectedItem = null;
+
+      // Function to change quantity and update totals
+      function changeQuantity(itemId, change) {
+        const qtyElement = document.getElementById(`qty-${itemId}`);
+        const totalElement = document.getElementById(`total-${itemId}`);
+        let quantity = parseInt(qtyElement.innerText) + change;
+
+        // Ensure quantity doesn't go below 1
+        if (quantity < 1) quantity = 1;
+        qtyElement.innerText = quantity;
+
+        // Update total for the item
+        const total = prices[itemId] * quantity;
+        totalElement.innerText = `Rp ${total.toLocaleString("id-ID")}`;
+
+        // Update subtotal and total for the selected item
+        if (selectedItem === itemId) {
+          updateCartTotal();
+        }
+      }
+
+      // Function to update subtotal and total based on selected item
+      function updateCartTotal() {
+        const subtotal = calculateSubtotal();
+        document.getElementById("subtotal").innerText = `Rp ${subtotal.toLocaleString("id-ID")}`;
+        document.getElementById("total").innerText = `Rp ${subtotal.toLocaleString("id-ID")}`;
+      }
+
+      // Function to handle deletion, reset subtotal, deselect radio button, and reset quantity
+      function onDeleteItem(itemId) {
+        // Reset quantity and total for the specified item
+        document.getElementById(`qty-${itemId}`).innerText = "0";
+        document.getElementById(`total-${itemId}`).innerText = "Rp 0";
+
+        // Deselect the radio button if it's the selected item
+        if (selectedItem === itemId) {
+          document.getElementById(`radio-${itemId}`).checked = false;
+          selectedItem = null;
+          updateCartTotal(); // Recalculate the subtotal
+        }
+      }
+
+      // Calculate the subtotal based on selected item
+      function calculateSubtotal() {
+        let total = 0;
+        if (document.getElementById("radio-item1").checked) {
+          selectedItem = "item1";
+          const qty = parseInt(document.getElementById("qty-item1").innerText);
+          total = prices.item1 * qty;
+        } else if (document.getElementById("radio-item2").checked) {
+          selectedItem = "item2";
+          const qty = parseInt(document.getElementById("qty-item2").innerText);
+          total = prices.item2 * qty;
+        }
+        return total;
+      }
+
+      // Add event listeners to radio buttons for immediate subtotal update
+      document.getElementById("radio-item1").addEventListener("change", () => {
+        selectedItem = "item1";
+        updateCartTotal();
+      });
+
+      document.getElementById("radio-item2").addEventListener("change", () => {
+        selectedItem = "item2";
+        updateCartTotal();
+      });
+
+    // Hide dropdown if clicked outside
+    const accountDropdownButton = document.getElementById("accountDropdownButton");
+    const accountDropdownMenu = document.getElementById("accountDropdownMenu");
+
+    accountDropdownButton.addEventListener("click", (event) => {
+      event.stopPropagation();
+      accountDropdownMenu.classList.toggle("hidden");
+    });
+
+    // Close the dropdown on scroll
+    window.addEventListener("scroll", () => {
+      if (!accountDropdownMenu.classList.contains("hidden")) {
+        accountDropdownMenu.classList.add("hidden");
+      }
+    });
+
+    // Close the dropdown if the user clicks outside of it
+    document.addEventListener("click", (event) => {
+      if (!accountDropdownButton.contains(event.target) && !accountDropdownMenu.contains(event.target)) {
+        accountDropdownMenu.classList.add("hidden");
+      }
+    });
+
+    // Carousel Navigation
+    const carouselItems = Array.from(document.querySelectorAll('.carousel-item'));
+    const prevButton = document.getElementById('carouselPrev');
+    const nextButton = document.getElementById('carouselNext');
+    let startIndex = 0;
+
+    function updateCarousel() {
+      carouselItems.forEach((item) => item.classList.add('hidden'));
+      
+      for (let i = 0; i < 3; i++) {
+        const itemIndex = (startIndex + i) % carouselItems.length;
+        carouselItems[itemIndex].classList.remove('hidden');
+      }
+    }
+
+    prevButton.addEventListener('click', () => {
+      startIndex = (startIndex - 3 + carouselItems.length) % carouselItems.length;
+      updateCarousel();
+    });
+
+    nextButton.addEventListener('click', () => {
+      startIndex = (startIndex + 3) % carouselItems.length;
+      updateCarousel();
+    });
+
+    updateCarousel();
+
+      // Get the button for scrolling to the top
+      const scrollToTopButton = document.getElementById('scrollToTopButton');
+
+      // Show or hide the scroll to top button based on scroll position
+      window.onscroll = function () {
+          if (document.body.scrollTop > 400 || document.documentElement.scrollTop > 400) {
+              scrollToTopButton.classList.remove('hidden');
+              scrollToTopButton.classList.add('block');
+              scrollToTopButton.classList.remove('opacity-0');
+              scrollToTopButton.classList.add('opacity-100');
+          } else {
+              scrollToTopButton.classList.add('hidden');
+              scrollToTopButton.classList.remove('block');
+              scrollToTopButton.classList.add('opacity-0');
+              scrollToTopButton.classList.remove('opacity-100');
+          }
+      };
+
+      // Scroll to top
+      scrollToTopButton.addEventListener('click', function () {
+          window.scrollTo({
+              top: 0,
+              behavior: 'smooth'
+          });
+      });
+    </script>
+    </body>
+</html>

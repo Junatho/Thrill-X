@@ -1,0 +1,1132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ThrillX Booking Page</title>
+	  <link rel="icon" type="image/x-icon" href="icons/ThrillX Logo.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="sessionTimeout.js"></script>
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        .font-bebas {
+            font-family: 'Bebas Neue', sans-serif;
+        }
+        .font-roboto {
+            font-family: 'Roboto', sans-serif;
+        }
+        .font-roboto-mono {
+            font-family: 'Roboto Mono', monospace;
+        }
+        .hide-date-icon::-webkit-calendar-picker-indicator {
+            display: none;
+        }
+        .hide-date-icon {
+            -webkit-appearance: none;
+            appearance: none;
+        }
+    </style>
+</head>
+
+	<!-- Scroll to Top Button -->
+    <button id="scrollToTopButton" class="fixed bottom-1 right-1 bg-[#A61E28] text-white rounded-xl px-3 py-2 shadow-lg hidden transition-opacity duration-300 ease-in-out opacity-0 hover:opacity-100 z-50">
+        <i class="fas fa-arrow-up-from-bracket"></i>
+    </button>
+    
+    <!-- Navbar -->
+    <nav id="navbar" class="navbar bg-[#000000] p-4 fixed top-0 w-full z-50 transition-transform duration-300">
+        <div class="container mx-auto flex items-center justify-between">
+            <div class="flex items-center space-x-4">
+              <a href="LandingPage.html">
+                <img src="icons/ThrillX Logo.png" alt="ThrillX Logo" class="h-16">
+              </a>
+                <select class="bg-[#000000] text-white py-1 px-3 rounded-xl text-xl font-roboto-mono">
+                    <option value="idr">IDR</option>
+                    <option value="usd">USD</option>
+                    <option value="eur">EUR</option>
+                    <option value="gbp">GBP</option>
+                </select>
+            </div>
+            
+        <!-- Links -->
+        <div class="flex flex-1 pr-12 justify-center items-center space-x-8">
+            <a href="LandingPage.html" class="text-[#9A040F] hover:text-[#9A040F] text-xl font-roboto-mono tracking-wider hidden lg:block">ACTIVITIES</a>
+            <div class="inline-block h-10 w-0.5 bg-[#919191] mx-4 hidden lg:block"></div>
+            <a href="#" class="text-[#919191] hover:text-gray-100 text-xl font-roboto-mono tracking-wider hidden lg:block">EXPLORE</a>
+            <div class="inline-block h-10 w-0.5 bg-[#919191] mx-4 hidden lg:block"></div>
+            
+            <!-- Dropdown Wrapper for ACCOUNT -->
+            <div class="relative inline-block text-left">
+              <button id="accountDropdownButton" type="button" class="text-[#919191] hover:text-gray-100 text-xl font-roboto-mono tracking-wider hidden lg:block focus:outline-none">
+                ACCOUNT
+              </button>
+              
+              <!-- Dropdown Menu -->
+              <div id="accountDropdownMenu" class="origin-top-right absolute right-0 mt-2 w-56 rounded-lg shadow-lg bg-white ring-1 ring-black ring-opacity-5 hidden">
+                <div class="px-4 py-2 text-gray-700">
+                  <p class="USERNAME font-bold font-roboto">Username</p>
+                  <p class="EMAIL font-medium font-roboto">user@example.com</p>
+                </div>
+                <hr class="border-gray-300">
+                <a id="LogOutButton" class="font-roboto block px-4 py-2 text-gray-700 hover:bg-[#A61E28] hover:text-white rounded-b-lg text-center font-semibold">
+                  Logout
+                </a>
+              </div>
+            </div>
+          </div>
+            
+            <!-- Help and Cart -->
+            <div class="flex items-center space-x-4">
+				<a href="#" class="text-[#919191] hover:text-gray-100 text-xl font-roboto-mono">HELP</a>
+				<div class="inline-block h-10 w-0.5 bg-[#919191] mx-4"></div>
+				<a href="ShoppingCart.html" class="bg-white text-gray-500 hover:bg-[#6b0c0c] hover:text-white uppercase py-1 px-3 rounded-xl text-xl font-roboto-mono">CART</a>
+			</div>
+        </div>
+    </nav>
+
+    <!-- Tab Navigation -->
+    <div id="tab-navigation" class="tab-navigation bg-white shadow-md px-4 py-3 text-[#818181] text-xl tracking-wide sticky top-0 z-40 mt-[100px]">
+        <div class="max-w-7xl mx-auto flex justify-between">
+            <a href="#overview" class="hover:text-[#0f0f0f] font-roboto-mono font-semi-bold uppercase">OVERVIEW</a>
+            <a href="#package-options" class="hover:text-[#212121] font-roboto-mono font-semi-bold uppercase">PACKAGE OPTIONS</a>
+            <a href="#information" class="hover:text-[#212121] font-roboto-mono font-semi-bold uppercase">INFORMATION</a>
+            <a href="#risks" class="hover:text-[#212121] font-roboto-mono font-semi-bold uppercase">RISKS</a>
+            <a href="#location" class="hover:text-[#212121] font-roboto-mono font-semi-bold uppercase">LOCATION</a>
+            <a href="#reviews" class="hover:text-[#212121] font-roboto-mono font-semi-bold uppercase">REVIEWS</a>
+            <a href="#faq" class="hover:text-[#212121] font-roboto-mono font-semi-bold uppercase">FAQ</a>
+            <a href="#essentials" class="hover:text-[#212121] font-roboto-mono font-semi-bold uppercase">ESSENTIALS</a>
+        </div>
+    </div>
+
+    <!-- !!!! B O D Y  C O N T E N T !!!!!-->
+
+    <!-- SECTION 1: TITLE AND IMAGES -->
+    <section id="overview" class="section px-6 pt-12">
+        <!--Title-->
+        <h2 id="activityTitle" class="text-4xl font-roboto font-bold uppercase ml-4 mb-6">5GX REVERSE BUNGY</h2>
+         <!-- grids container -->
+         <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 ml-4 mr-6">
+            <!--left column-->
+            <div class="lg:col-span-2 space-y-4">
+                <!--Keterangan bawah judul-->
+                <div class="flex items-center text-sm space-x-4">
+                    <div class="flex items-center">
+                        <span class="text-black stroke-black text-sm"> <i class="fa-solid fa-star fa-lg" style="color: #FFD43B;"></i> 4.9 </span>
+                        <span class="ml-2 text-gray-500 text-sm"> (100+ reviews) </span>
+                    </div>
+                    <span class="text-gray-500">5K+ booked</span>
+                    <span id="locationField" class="font-semi-bold"> 
+                        <i class="fa-solid fa-location-dot fa-sm"></i> </span>
+                    <span id="openHoursField">
+                        <i class="fa-regular fa-clock fa-sm"></i> Open Hours: </span>
+                </div>
+                <!--Main image-->
+                <img id="activityImage" src="images/5gx.png" alt="Activity Image" class="w-full h-80 object-cover rounded-lg">
+            </div> <!--tutup item-->
+
+            <!--Right column-->
+            <div class="space-y-4">
+                <!--add to favorites-->
+                <div class="flex items-center text-sm font-semi-bold space-x-4">
+                    <button class="w-8 h-8 bg-[#730008] hover:bg-[#9A040F] text-red-500 rounded-full flex items-center justify-center hover:bg-[#730008] transition duration-200">
+                            <i class="fa-regular fa-heart fa-lg text-white"></i>
+                    </button>
+                    <span class="font-medium text-lg"> Add to favorites</span>
+                    
+                </div>
+                <!--side images-->
+                <img id="sidePhoto1" src="images/5gx-2.jpg" alt="Side Photo 1" class="w-full h-36 object-cover rounded-lg">
+                <img id="sidePhoto2" src="images/5gx-3.jpg" alt="Side Photo 2" class="w-full h-36 object-cover rounded-lg">
+                <a href="#" class="text-center block text-gray-500">View All Photos ➔</a>
+            </div>
+
+        </div> <!--tutup grid container-->
+    </section>
+            
+    <!-- SECTION 2: Activities Info and Descriptions  -->
+    <section class="px-6 py-12 pt-0 pb-10 mb-8">
+        <!-- grids container -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 ml-4 mr-6">
+            <!--Left column-->
+            <div class="lg:col-span-2 space-y-4">
+                <!--Description-->
+                <p id="activityDescription" class="mb-8 font-medium text-lg">
+                    5GX Bali Reverse Bungy is a slingshot ride offering an adrenaline-inducing experience in Bali. The capsule is catapulted 50 metres into the air at mind-boggling speed around 200 km/h.
+                </p>
+                 <!-- Highlights -->
+                <div class="bg-[#212121] text-white p-6 rounded-lg shadow-md">
+                    <div class="flex justify-between items-center mb-4 font-roboto-mono">
+                        <h3 class="text-[#A61E28] text-3xl pl-2 font-semibold">
+                            <i class="fas fa-bullhorn mr-2"></i> HIGHLIGHTS
+                        </h3>
+                        <a href="#" class="text-2xl text-gray-300 flex items-center pr-4">
+                            <i class="fas fa-arrow-circle-right mr-2"></i> DETAILS
+                        </a>
+                    </div>                    
+                    <ul id="highlightsContainer" class="text-lg text-[#fdf7fa] list-disc p-8 pt-2 space-y-6">
+                        <!-- <li>Each ride can accommodate 3 people at a time, with each being strapped into the capsule while on the ground.</li>
+                        <li>There’s a camera directly in front of the seats that takes your photo during the ride – you can purchase it as a memento of your experience.</li> -->
+                    </ul>
+                </div> <!--tutup highlights-->
+            </div> <!-- tutup column-->
+
+            <!-- Column 2/right: Host and Check Availability -->
+            <div class="space-y-4">
+                <!-- Host -->
+                <div class="bg-white pt-10 pb-10 flex">
+                    <!-- Left Column: Host Profile and Name -->
+                    <div class="w-9/12 flex items-center space-x-4">
+                        <img src="images/hostprofile.jpg" alt="Host" class="w-20 h-20 rounded-full object-cover">
+                        <div>
+                            <h4 class="text-3xl font-roboto-mono font-bold">Host</h4>
+                            <p class="text-lg text-[#3D3D3D]">Cathleen Sanjaya</p>
+                        </div>
+                    </div>
+                    <!-- Right Column: Chat Button -->
+                    <div class="w-3/12 flex items-center justify-end">
+                        <button class="bg-[#730008] text-white font-medium text-lg px-5 py-2 rounded-full hover:bg-[#9A040F]">Chat</button>
+                    </div>
+                </div>
+                <!-- Spacer for sticky availability -->
+                <div id="availabilitySpacer" style="height: 0;"></div>            
+
+				<!-- Check Availability -->
+                <div id="stickyAvailability" class="bg-black text-white p-6 rounded-lg shadow-md">
+                    <p class="font-roboto">Start from</p>
+                    <p id="startFromPrice" class="text-3xl font-bold font-roboto-mono">Rp 700.000</p>
+                    
+                    <a href="#package-options">
+                        <button class="w-full mt-4 p-6 bg-[#730008] text-white font-medium text-lg py-3 rounded-full transition-colors duration-300 flex items-center justify-between">
+                            <span class="flex items-center">
+                                <i class="fa-regular fa-calendar fa-xs mr-4 text-xl"></i>
+                                Check Availability
+                            </span>
+                            <i class="fas fa-arrow-right ml-auto text-white"></i>
+                        </button>
+                    </a>
+                </div>                
+            </div> <!--tutup right column-->
+        </div> <!--tutup grid container section 2-->                
+    </section>
+
+<!-- SECTION 3: Package options and activities info -->
+<section id="package-options" class="section px-6 py-12 pt-0 pb-2">
+    <!-- PACKAGE OPTIONS -->
+    <h2 class="text-4xl font-roboto font-bold uppercase ml-4 mb-6">PACKAGE OPTIONS</h2>
+
+    <!-- Grids container -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 ml-4 mr-6">
+        <!-- Left column -->
+        <div class="lg:col-span-2 space-y-4">
+            <div id="packageContainer">
+                <!-- First Package: Highlights -->
+                <!-- <div class="bg-black text-white rounded-xl shadow-md"> -->
+                    <!-- Package Content -->
+                    <!-- <div class="flex flex-col p-6 space-y-2 flex-grow"> -->
+                        <!-- Package Title -->
+                        <!-- <p class="font-semibold font-roboto-mono text-white text-2xl">5GX Ride for 2 Person(s)</p> -->
+                        
+                        <!-- Highlight Tags -->
+                        <!-- <div class="flex gap-2">
+                            <div class="bg-white text-black py-1 px-3 border border-black rounded-lg font-medium text-sm">
+                                Free Cancellation (24 hours notice)
+                            </div>
+                            <div class="bg-white text-black py-1 px-3 border border-black rounded-lg font-medium text-sm">
+                                Instant Confirmation
+                            </div>
+                        </div>
+                    </div> -->
+
+                    <!-- Bottom Section: Price Info and Action Buttons -->
+                    <!-- <div class="bg-[#3D3D3D] p-6 pb-2 pt-2 mb-10 flex items-center justify-between rounded-b-xl"> -->
+                        <!-- Pricing Text -->
+                        <!-- <div class="flex flex-col">
+                            <p class="text-sm text-white font-roboto-mono font-bold">Total Price</p>
+                            <p class="text-2xl font-roboto-mono font-bold text-white">Rp 700.000</p>
+                            <p class="text-sm text-[#b3b3b3]">All fees and taxes included</p>
+                        </div> -->
+                        
+                        <!-- Action Buttons -->
+                        <!-- <div class="flex space-x-4 ml-auto"> -->
+                            <!-- Add to Cart Button -->
+                            <!-- <a href="ShoppingCart.html">
+                                <button class="bg-[#818181] font-medium text-black px-4 py-2 rounded-3xl hover:bg-gray-400">
+                                    Add to Cart
+                                </button>
+                            </a> -->
+                            
+                            <!-- Book Now Button -->
+                            <!-- <button class="bg-[#730008] text-white px-4 py-2 rounded-3xl hover:bg-[#9A040F]">
+                                Book Now
+                            </button>
+                        </div> -->
+                    <!-- </div> -->
+                    <!-- End of bottom section -->
+                <!-- </div>  -->
+                <!-- End of first package highlights -->
+
+                <!-- Second Package: Highlights (duplicate) -->
+                <!-- <div class="bg-black text-white rounded-xl shadow-md"> -->
+                    <!-- Package Content -->
+                    <!-- <div class="flex flex-col p-6 space-y-2 flex-grow"> -->
+                        <!-- Package Title -->
+                        <!-- <p class="font-semibold font-roboto-mono text-white text-2xl">5GX Ride for 3 Person(s)</p> -->
+                        
+                        <!-- Highlight Tags -->
+                        <!-- <div class="flex gap-2"> -->
+                            <!-- <div class="bg-white text-black py-1 px-3 border border-black rounded-lg font-medium text-sm">
+                                Free Cancellation (24 hours notice)
+                            </div>
+                            <div class="bg-white text-black py-1 px-3 border border-black rounded-lg font-medium text-sm">
+                                Instant Confirmation
+                            </div>
+                        </div>
+                    </div> -->
+
+                    <!-- Bottom Section: Price Info and Action Buttons -->
+                    <!-- <div class="bg-[#3D3D3D] p-6 pb-2 pt-2 mb-10 flex items-center justify-between rounded-b-xl"> -->
+                        <!-- Pricing Text -->
+                        <!-- <div class="flex flex-col">
+                            <p class="text-sm text-white font-roboto-mono font-bold">Total Price</p>
+                            <p class="text-2xl font-roboto-mono font-bold text-white">Rp 1.200.000</p>
+                            <p class="text-sm text-[#b3b3b3]">All fees and taxes included</p>
+                        </div> -->
+                        
+                        <!-- Action Buttons -->
+                        <!-- <div class="flex space-x-4 ml-auto"> -->
+                            <!-- Add to Cart Button -->
+                            <!-- <a href="ShoppingCart.html">
+                                <button class="bg-[#818181] font-medium text-black px-4 py-2 rounded-3xl hover:bg-gray-400">
+                                    Add to Cart
+                                </button>
+                            </a> -->
+                            
+                            <!-- Book Now Button -->
+                            <!-- <button class="bg-[#730008] text-white px-4 py-2 rounded-3xl hover:bg-[#9A040F]">
+                                Book Now
+                            </button>
+                        </div> -->
+                    <!-- </div>  -->
+                    <!-- End of bottom section -->
+                <!-- </div>  -->
+                <!-- End of second package highlights -->
+            </div>
+
+            <!-- Grid Layout for Activity Information -->
+            <h2 id="information" class="section text-4xl font-roboto font-bold uppercase pt-10">ACTIVITY INFO</h2>
+            <div class="col-span-2 bg-white">
+                <div id="activityInfoContainer" class="grid grid-cols-3 gap-4 mt-10">
+                    <!-- Full Description -->
+                    <!-- <div class="col-span-3 border-b-2 border-gray-300 pb-4 flex">
+                        <div class="w-1/3 font-semibold pr-4 font-roboto-mono tracking-wider">Full description</div>
+                        <div class="w-2/3 font-roboto ">
+                            5GX Reverse Bungy is a slingshot ride offering an adrenaline-inducing experience in Bali. Each ride can accommodate 3 people at a time, with each being strapped into the capsule while on the ground. At the press of a button, the capsule is catapulted 50 metres into the air at a mind-boggling speed around 200 km/h.
+                        </div>
+                    </div> -->
+                    
+                    <!-- Includes -->
+                    <!-- <div class="col-span-3 border-b-2 border-gray-300 pb-4 flex">
+                        <div class="w-1/3 font-semibold pr-4 font-roboto-mono tracking-wider">Includes</div>
+                        <div class="w-2/3 font-roboto ">
+                            1x ride to 5GX Bali for 2 person, duration: approximately 3-5 minutes.
+                        </div>
+                    </div> -->
+
+                    <!-- Not Suitable For -->
+                    <!-- <div class="col-span-3 border-b-2 border-gray-300 pb-4 flex">
+                        <div class="w-1/3 font-semibold pr-4 font-roboto-mono tracking-wider">Not suitable for</div>
+                        <div class="w-2/3 font-roboto ">
+                            <ul class="list-none list-inside">
+                                <li>Age over 60</li>
+                                <li>Age below 10</li>
+                                <li>Pregnant women</li>
+                                <li>People with a history of heart disease and high blood pressure</li>
+                            </ul>
+                        </div>
+                    </div> -->
+
+                    <!-- Notes -->
+                    <!-- <div class="col-span-3 pb-4 flex">
+                        <div class="w-1/3 font-semibold pr-4 font-roboto-mono tracking-wider">Note</div>
+                        <div class="w-2/3 font-roboto ">
+                            <ul class="list-none list-inside">
+                                <li>There’s a camera directly in front of the seats that takes your photo during the ride - you can purchase a print as a memento of your experience.</li>
+                                <br>
+                                <li>Avoid wearing accessories and sandals</li>
+                                <br>
+                                <li>Wait at least two hours after eating</li>
+                            </ul>
+                        </div>
+                    </div> -->
+                </div>
+                <!-- Activity Risks -->
+                <div id="risks" class="section p-4 border-4 border-[#730008] rounded-lg mt-6 mb-12">
+                    <!--Title-->
+                    <h2 class="text-4xl font-roboto font-bold uppercase ml-4 mb-6 flex items-center space-x-4">
+                        <span>ACTIVITY RISKS</span>
+                        <span class="ml-2">
+                            <img src="icons/sealwarning.png" alt="Warning Icon" class="w-8 h-8">
+                        </span>
+                    </h2>
+                    <!--List of Risks-->
+                    <div id="risksContainer" class="mt-4 pl-4 pb-2 space-y-2">
+                        <!-- <div class="flex items-start space-x-8">
+                            <span class="text-xl">
+                                <i class="fa-solid fa-xmark fa-lg"></i>
+                            </span>
+                            <p>This activity doesn't have insurance and you are required to sign the agreement before riding reverse bungy at SGX Bali.</p>
+                        </div> -->
+                        <!-- <div class="flex items-start space-x-8">
+                            <span class="text-xl">
+                                <i class="fa-solid fa-xmark fa-lg"></i>
+                            </span>
+                            <p>Minor injuries like scratches on the neck because of the seatbelt, etc.</p>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- LOCATION -->
+            <h2 id="location" class="section text-4xl font-roboto font-bold uppercase mb-6 mt-10 pt-6">LOCATION</h2>
+            <div class="grid grid-cols-1 gap-8">
+                <div class="space-y-4 pb-6">
+                    <iframe id="locationGMAPS" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.2679726904835!2d106.60847827355448!3d-6.228358260993805!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69fc1ec652a1d3%3A0x79c34e4f78fbbf2!2sUniversitas%20Pelita%20Harapan!5e0!3m2!1sen!2sid!4v1730374839002!5m2!1sen!2sid"
+                            width="100%" height="230" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </div>
+        </div> <!-- End of left column -->
+    </div> <!--tutup grid container-->
+    </div> <!-- End of grid container section -->
+</section>
+    
+	<!-- SECTION 4: REVIEWS AND RATINGS -->
+	<section id="reviews" class="section px-6 py-12">
+		<div class="flex items-center mb-6">
+			<h2 class="text-4xl font-roboto font-bold uppercase ml-4">REVIEWS AND RATINGS</h2>
+			<div class="flex items-center ml-4">
+				<span class="text-black stroke-black text-sm"> <i class="fa-solid fa-star fa-lg" style="color: #FFD43B;"></i> 4.9 </span>
+				<span class="ml-2 text-gray-500 text-xl"> (100+ reviews) </span>
+			</div>
+		</div>
+			<!-- Grid container -->
+			<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2 ml-4 mr-6">
+				<!-- Review 1 -->
+				<div class="bg-[#212121] rounded-xl flex flex-col space-y-4 h-[320px]">
+					<!-- Review Content -->
+					<div class="flex flex-col p-6 space-y-2 flex-grow">
+						<!-- Star Emojis -->
+						<div class="flex text-[#FFD43B] text-2xl pb-2">
+							<span>
+                                <i class="fa-solid fa-star fa-lg" style="color: #FFD43B;"></i>
+                                <i class="fa-solid fa-star fa-lg" style="color: #FFD43B;"></i>
+                                <i class="fa-solid fa-star fa-lg" style="color: #FFD43B;"></i>
+                                <i class="fa-solid fa-star fa-lg" style="color: #FFD43B;"></i>
+                                <i class="fa-solid fa-star fa-lg" style="color: #FFD43B;"></i>
+                            </span>
+						</div>
+						<!-- Text 1 -->
+						<p class="font-semibold uppercase text-white text-xl pb-4">HIGHLY RECOMMENDED</p>
+						<!-- More Text -->
+						<p class="text-sm text-[#C9C9C9]">I have never done anything like this! 10/10 recommended!</p>
+					</div>
+
+					<!-- Profile and Chat Button -->
+					<div class="bg-[#3D3D3D] p-4 pb-5 flex items-center justify-between rounded-lg">
+						<!-- Profile Info -->
+						<div class="flex items-center space-x-4">
+							<img src="images/hostprofile.jpg" alt="Host" class="w-12 h-12 rounded-full object-cover">
+							<div>
+								<h4 class="text-lg text-white font-semi-bold overflow-hidden text-ellipsis whitespace-nowrap" style="max-width: 120px;">Sumanto</h4>
+								<p class="text-sm text-[#818181]">15 July 2023</p>
+							</div>
+						</div>
+
+						<!-- Right-aligned Chat Button with FontAwesome -->
+						<button class="bg-[#730008] text-white px-3 py-2 pl-3 rounded-3xl hover:bg-[#9A040F]">
+							<i class="fa-solid fa-arrow-right"></i> <!-- FontAwesome Right Arrow Icon -->
+						</button>
+					</div>
+				</div>
+
+				<!-- Review 2 -->
+				<div class="bg-[#212121] rounded-xl flex flex-col space-y-4 h-[320px]">
+					<!-- Review Content -->
+					<div class="flex flex-col p-6 space-y-2 flex-grow">
+						<!-- Star Emojis -->
+						<div class="flex text-text-[#FFD43B] text-2xl pb-2">
+							<span>
+                                <i class="fa-solid fa-star fa-lg" style="color: #FFD43B;"></i>
+                                <i class="fa-solid fa-star fa-lg" style="color: #FFD43B;"></i>
+                                <i class="fa-solid fa-star fa-lg" style="color: #FFD43B;"></i>
+                                <i class="fa-solid fa-star fa-lg" style="color: #FFD43B;"></i>
+                                <i class="fa-solid fa-star fa-lg" style="color: #FFD43B;"></i>
+                            </span>
+						</div>
+						<!-- Text 1 -->
+						<p class="font-semibold uppercase text-white text-xl pb-4">SUPER FANTASTIC</p>
+						<!-- More Text -->
+						<p class="text-sm text-[#C9C9C9]">The game is fun, it's quiet so there's no queue.</p>
+					</div>
+
+					<!-- Profile and Chat Button -->
+					<div class="bg-[#3D3D3D] p-4 pb-5 flex items-center justify-between rounded-lg">
+						<!-- Profile Info -->
+						<div class="flex items-center space-x-4">
+							<img src="images/hostprofile.jpg" alt="Host" class="w-12 h-12 rounded-full object-cover">
+							<div>
+								<h4 class="text-lg text-white font-semi-bold overflow-hidden text-ellipsis whitespace-nowrap" style="max-width: 120px;">Rudy</h4>
+								<p class="text-sm text-[#818181]">13 October 2021</p>
+							</div>
+						</div>
+
+						<!-- Right-aligned Chat Button with FontAwesome -->
+						<button class="bg-[#730008] text-white px-3 py-2 pl-3 rounded-3xl hover:bg-[#9A040F]">
+							<i class="fa-solid fa-arrow-right"></i> <!-- FontAwesome Right Arrow Icon -->
+						</button>
+					</div>
+				</div>
+
+				<!-- Review 3 -->
+				<div class="bg-[#212121] rounded-xl flex flex-col space-y-4 h-[320px]">
+					<!-- Review Content -->
+					<div class="flex flex-col p-6 space-y-2 flex-grow">
+						<!-- Star Emojis -->
+						<div class="flex text-text-[#FFD43B] text-2xl pb-2">
+							<span>
+                                <i class="fa-solid fa-star fa-lg" style="color: #FFD43B;"></i>
+                                <i class="fa-solid fa-star fa-lg" style="color: #FFD43B;"></i>
+                                <i class="fa-solid fa-star fa-lg" style="color: #FFD43B;"></i>
+                                <i class="fa-solid fa-star fa-lg" style="color: #FFD43B;"></i>
+                                <i class="fa-solid fa-star fa-lg" style="color: #FFD43B;"></i>
+                            </span>
+						</div>
+						<!-- Text 1 -->
+						<p class="font-semibold uppercase text-white text-xl pb-4">SUPER AWESOME</p>
+						<!-- More Text -->
+						<p class="text-sm text-[#C9C9C9]">It was the best! I saw it when I went to Bali in 2018, I want to do it again!</p>
+					</div>
+
+					<!-- Profile and Chat Button -->
+					<div class="bg-[#3D3D3D] p-4 pb-5 flex items-center justify-between rounded-lg">
+						<!-- Profile Info -->
+						<div class="flex items-center space-x-4">
+							<img src="images/hostprofile.jpg" alt="Host" class="w-12 h-12 rounded-full object-cover">
+							<div>
+								<h4 class="text-lg text-white font-semi-bold overflow-hidden text-ellipsis whitespace-nowrap" style="max-width: 120px;">Ishizaki</h4>
+								<p class="text-sm text-[#818181]">16 February 2024</p>
+							</div>
+						</div>
+
+						<!-- Right-aligned Chat Button with FontAwesome -->
+						<button class="bg-[#730008] text-white px-3 py-2 pl-3 rounded-3xl hover:bg-[#9A040F]">
+							<i class="fa-solid fa-arrow-right"></i> <!-- FontAwesome Right Arrow Icon -->
+						</button>
+					</div>
+				</div>
+
+				<!-- Review 4 -->
+				<div class="bg-[#212121] rounded-xl flex flex-col space-y-4 h-[320px]">
+					<!-- Review Content -->
+					<div class="flex flex-col p-6 space-y-2 flex-grow">
+						<!-- Star Emojis -->
+						<div class="flex text-text-[#FFD43B] text-2xl pb-2">
+							<span>
+                                <i class="fa-solid fa-star fa-lg" style="color: #FFD43B;"></i>
+                                <i class="fa-solid fa-star fa-lg" style="color: #FFD43B;"></i>
+                                <i class="fa-solid fa-star fa-lg" style="color: #FFD43B;"></i>
+                                <i class="fa-solid fa-star fa-lg" style="color: #FFD43B;"></i>
+                                <i class="fa-solid fa-star fa-lg" style="color: #FFD43B;"></i>
+                            </span>
+						</div>
+						<!-- Text 1 -->
+						<p class="font-semibold uppercase text-white text-xl pb-4">PRETTY GOOD</p>
+						<!-- More Text -->
+						<p class="text-sm text-[#C9C9C9]">Fun but very short-lived for the price. Staff were really fun and friendly. 
+						Such a shame that it wasnt long enough or priced lower.</p>
+					</div>
+
+					<!-- Profile and Chat Button -->
+					<div class="bg-[#3D3D3D] p-4 pb-5 flex items-center justify-between rounded-lg">
+						<!-- Profile Info -->
+						<div class="flex items-center space-x-4">
+							<img src="images/hostprofile.jpg" alt="Host" class="w-12 h-12 rounded-full object-cover">
+							<div>
+								<h4 class="text-lg text-white font-semi-bold overflow-hidden text-ellipsis whitespace-nowrap" style="max-width: 120px;">Daniel Smith</h4>
+								<p class="text-sm text-[#818181]">10 October 2023</p>
+							</div>
+						</div>
+
+						<!-- Right-aligned Chat Button with FontAwesome -->
+						<button class="bg-[#730008] text-white px-3 py-2 pl-3 rounded-3xl hover:bg-[#9A040F]">
+							<i class="fa-solid fa-arrow-right"></i> <!-- FontAwesome Right Arrow Icon -->
+						</button>
+					</div>
+				</div>
+			</div>
+	</section>
+
+    <!-- SECTION 5: FAQ and Shoutbox Section -->
+    <section id="faq" class="section px-6 py-12">
+        <h2 class="text-4xl font-roboto font-bold uppercase ml-4 mb-6">FREQUENTLY ASKED QUESTIONS (FAQ)</h2>
+        
+        <!-- Grid container -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 ml-4 mr-6">
+
+            <!-- FAQ column -->
+            <div id="faqContainer" class="lg:col-span-2 space-y-4">
+                <!-- FAQ 1 -->
+                <!-- <div class="bg-[#212121] text-white text-xl rounded-lg p-8 hover:bg-[#0f0f0f] transition duration-200">
+                    <div class="flex justify-between items-center"> -->
+                    <!-- Question Area -->
+                    <!-- <div class="w-10/12">
+                        <span>How high is the 5GX?</span>
+                    </div> -->
+                    <!-- Button Area -->
+                    <!-- <div class="w-2/12 flex justify-end">
+                        <button class="w-10 h-10 bg-black text-red-500 rounded-full flex items-center justify-center hover:bg-gray-500 transition duration-200" onclick="toggleFAQ(1)">
+                        <span id="plusMinus1">+</span>
+                        </button>
+                    </div>
+                    </div>
+                    <div id="faq1" class="faq-answer hidden">
+                    <p class="text-[#b3b3b3] mt-4">The 5GX is 35 meters high.</p>
+                    </div>
+                </div> -->
+
+                <!-- FAQ 2 -->
+                <!-- <div class="bg-[#212121] text-white text-xl rounded-lg p-8 hover:bg-[#0f0f0f] transition duration-200">
+                    <div class="flex justify-between items-center"> -->
+                        <!-- Question Area -->
+                        <!-- <div class="w-10/12">
+                            <span>How fast is the 5GX?</span>
+                        </div> -->
+                        <!-- Button Area -->
+                        <!-- <div class="w-2/12 flex justify-end">
+                            <button class="w-10 h-10 bg-black text-red-500 rounded-full flex items-center justify-center hover:bg-gray-500 transition duration-200" onclick="toggleFAQ(2)">
+                            <span id="plusMinus2">+</span>
+                            </button> -->
+                        <!-- </div>  -->
+                        <!--tutup button-->
+                    <!-- </div>  -->
+                    <!--tutup class flex -->
+
+                    <!-- <div id="faq2" class="faq-answer hidden">
+                        <p class="text-[#b3b3b3] mt-4">The 5GX goes as fast as 200km/h.</p>
+                    </div>
+
+                </div> -->
+
+                <!-- FAQ 3 -->
+                <!-- <div class="bg-[#212121] text-white text-xl rounded-lg p-8 hover:bg-[#0f0f0f] transition duration-200">
+                    <div class="flex justify-between items-center"> -->
+                        <!-- Question Area -->
+                        <!-- <div class="w-10/12">
+                            <span>Is it safe? What is the safety procedure?</span>
+                        </div> -->
+                        <!-- Button Area -->
+                        <!-- <div class="w-2/12 flex justify-end">
+                            <button class="w-10 h-10 bg-black text-red-500 rounded-full flex items-center justify-center hover:bg-gray-500 transition duration-200" onclick="toggleFAQ(3)">
+                            <span id="plusMinus3">+</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div id="faq3" class="faq-answer hidden">
+                        <p class="text-[#b3b3b3] mt-4">The team of 5GX Bali Reverse Bungy really makes sure of the safety of the passengers. 
+                            You will be secured well into your seats using an airplane safety lap belt, and the staff will triple-check the belt.</p>
+                    </div>
+                </div> -->
+
+                <!-- FAQ 4 -->
+                <!-- <div class="bg-[#212121] text-white text-xl rounded-lg p-8 hover:bg-[#0f0f0f] transition duration-200">
+                    <div class="flex justify-between items-center"> -->
+                        <!-- Question Area -->
+                        <!-- <div class="w-10/12">
+                            <span>When is the best time to try the 5GX Reverse Bungy?</span>
+                        </div> -->
+                        <!-- Button Area -->
+                        <!-- <div class="w-2/12 flex justify-end">
+                            <button class="w-10 h-10 bg-black text-red-500 rounded-full flex items-center justify-center hover:bg-gray-500 transition duration-200" onclick="toggleFAQ(4)">
+                            <span id="plusMinus4">+</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div id="faq4" class="faq-answer hidden">
+                    <p class="text-[#b3b3b3] mt-4">It is recommended to try Bali's 5GX Reverse Bungy ride in the afternoon, 
+                        as you can see the sunset when the ride flies up to 50 meters. If you try the ride at night, then you will be able
+                        to see the lights all around Jalan Legian Kuta. </p>
+                    </div>
+                </div> -->
+            </div>
+
+            <!-- Shoutbox Column -->
+            <div class="lg:col-span-1 bg-[#212121] text-white rounded-lg p-8" style="height: 630px;">
+                <h3 class="text-3xl font-roboto-mono font-bold uppercase mt-4 mb-8">ASK YOUR QUESTION</h3>
+                <form>
+                    <label for="name" class="block text-[#A61E28] font-roboto-mono text-xl uppercase font-bold mb-2">NAME</label>
+                    <input id="name" type="text" class="w-full p-4 mb-6 bg-black text-white rounded" placeholder="Enter your name" required>
+
+                    <label for="email" class="block text-[#A61E28] font-roboto-mono text-xl uppercase font-bold mb-2">Email</label>
+                    <input id="email" type="email" class="w-full p-4 mb-6 bg-black text-white rounded" placeholder="Enter your email" required>
+
+                    <label for="question" class="block text-[#A61E28] font-roboto-mono text-xl uppercase font-bold mb-2">Your Question</label>
+                    <textarea id="question" class="w-full p-4 mb-6 bg-black text-white rounded" rows="4" placeholder="Enter your question" required></textarea>
+
+                    <button type="submit" class="w-full text-xl bg-[#A61E28] font-roboto-mono p-4 rounded">SEND YOUR MESSAGE</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 6: Other essentials -->
+    <section id="essentials" class="section px-6 py-12">
+        <!--Title-->
+        <h2 class="text-4xl font-roboto font-bold uppercase ml-4 mb-6">OTHER ESSENTIALS</h2>
+			<!-- Grid Container -->
+			<div class="grid grid-cols-1 lg:grid-cols-3 gap-8 ml-4 mr-6 p-2 bg-black rounded-xl">
+				<!-- Column 1: Hotels Nearby -->
+				<div class="flex flex-col m-5">
+					<h3 class="font-bebas text-[#9A040F] text-3xl tracking-wide font-medium mb-4">HOTELS NEARBY</h3>
+					<ul id="hotelsNearbyElement" class="space-y-4 text-white mb-3">
+						<!-- <li class="hover:text-gray-300">HARPER Kuta Bali</li>
+						<li class="hover:text-gray-300">The Niche Bali</li> -->
+					</ul>
+				</div>
+				
+				<!-- Column 2: How to Get There -->
+				<div class="flex flex-col m-5">
+					<h3 class="font-bebas text-[#9A040F] text-3xl tracking-wide font-medium mb-4">HOW TO GET THERE</h3>
+					<ul id="howToGetThereElement" class="space-y-4 text-white mb-3">
+						<!-- <li class="hover:text-gray-300">Taxis</li>
+						<li class="hover:text-gray-300">Motorcyle</li> -->
+                    </ul>
+				</div>
+				
+				<!-- Column 3: What You Need -->
+				<div class="flex flex-col m-5">
+					<h3 class="font-bebas text-[#9A040F] text-3xl tracking-wide font-medium mb-4">WHAT YOU NEED</h3>
+					<ul id="whatYouNeedElement" class="space-y-4 text-white mb-3">
+						<!-- <li class="hover:text-gray-300">Courage</li> -->
+					</ul>
+				</div>
+        </div> <!--tutup grid container-->
+    </section>
+
+    <!-- SECTION 7: Explore More Section -->
+		<section class="py-8 bg-bg-white relative">
+			<div class="container mx-auto pt-6">
+				
+				<!-- Section Heading -->
+				<h2 class="text-4xl font-roboto font-bold uppercase ml-4">EXPLORE MORE</h2>
+				
+				<!-- Carousel Container with Activities -->
+				<div id="carouselContainer" class="grid grid-cols-1 md:grid-cols-3 gap-2 pt-4 overflow-hidden">
+					<!-- First Activity -->
+					<a href="BookingPage.html?id=activity1" class="carousel-item activity-card block bg-white p-4 rounded-lg shadow group transition duration-300 transform hover:bg-gray-200">
+						<img src="images/5gx.png" alt="5GX Reverse Bungy" class="rounded-lg mb-4 h-60 w-full object-cover">
+						<div class="flex justify-between items-center mb-2">
+							<h3 class="text-xl font-roboto-mono font-bold text-[#000000]">Denpasar, Bali</h3>
+							<p class="text-[#000000] text-lg font-bold">4.9 <i class="fa-solid fa-star fa-lg" style="color: #FFD43B;"></i></p>
+						</div>
+						<h3 class="text-2xl font-roboto-mono font-bold text-[#000000]">5GX Reverse Bungy</h3>
+						<p class="text-lg font-roboto-mono font-bold text-[#000000] mt-1">From Rp 700,000</p>
+					</a>
+
+					<!-- Second Activity -->
+					<a href="BookingPage.html?id=activity2" class="carousel-item activity-card block bg-white p-4 rounded-lg shadow group transition duration-300 transform hover:bg-gray-200">
+						<img src="images/jetski.png" alt="Fun Jet Ski and Water Sport" class="rounded-lg mb-4 h-60 w-full object-cover">
+						<div class="flex justify-between items-center mb-2">
+							<h3 class="text-xl font-roboto-mono font-bold text-[#000000]">Tanjung Benoa, Bali</h3>
+							<p class="text-[#000000] text-lg font-bold">4.7 <i class="fa-solid fa-star fa-lg" style="color: #FFD43B;"></i></p>
+						</div>
+						<h3 class="text-2xl font-roboto-mono font-bold text-[#000000]">Fun Jet Ski and Water Sport</h3>
+						<p class="text-lg font-roboto-mono font-bold text-[#000000] mt-1">From Rp 600,000</p>
+					</a>
+
+					<!-- Third Activity -->
+					<a href="BookingPage.html?id=activity3" class="carousel-item activity-card block bg-white p-4 rounded-lg shadow group transition duration-300 transform hover:bg-gray-200">
+						<img src="images/flyboard.png" alt="Fly Board Experience" class="rounded-lg mb-4 h-60 w-full object-cover">
+						<div class="flex justify-between items-center mb-2">
+							<h3 class="text-xl font-roboto-mono font-bold text-[#000000]">Denpasar, Bali</h3>
+							<p class="text-[#000000] text-lg font-bold">4.5 <i class="fa-solid fa-star fa-lg" style="color: #FFD43B;"></i></p>
+						</div>
+						<h3 class="text-2xl font-roboto-mono font-bold text-[#000000]">Fly Board Experience</h3>
+						<p class="text-lg font-roboto-mono font-bold text-[#000000] mt-1">From Rp 1,200,000</p>
+					</a>
+
+					<!-- Fourth Activity -->
+					<a href="BookingPage.html?id=activity4" class="carousel-item activity-card block bg-white p-4 rounded-lg shadow group transition duration-300 transform hover:bg-gray-200">
+						<img src="images/atvride.png" alt="ATV Quad Bike Adventure" class="rounded-lg mb-4 h-60 w-full object-cover">
+						<div class="flex justify-between items-center mb-2">
+							<h3 class="text-xl font-roboto-mono font-bold text-[#000000]">Ubud, Bali</h3>
+							<p class="text-[#000000] text-lg font-bold">4.5 <i class="fa-solid fa-star fa-lg" style="color: #FFD43B;"></i></p>
+						</div>
+						<h3 class="text-2xl font-roboto-mono font-bold text-[#000000]">ATV Quad Bike Adventure</h3>
+						<p class="text-lg font-roboto-mono font-bold text-[#000000] mt-1">From Rp 460,000</p>
+					</a>
+
+					<!-- Fifth Activity -->
+					<a href="BookingPage.html?id=activity5" class="carousel-item activity-card block bg-white p-4 rounded-lg shadow group transition duration-300 transform hover:bg-gray-200">
+						<img src="images/atvExtremeTrek.jpeg" alt="Ubud ATV Extreme Trek" class="rounded-lg mb-4 h-60 w-full object-cover">
+						<div class="flex justify-between items-center mb-2">
+							<h3 class="text-xl font-roboto-mono font-bold text-[#000000]">Ubud, Bali</h3>
+							<p class="text-[#000000] text-lg font-bold">4.5 <i class="fa-solid fa-star fa-lg" style="color: #FFD43B;"></i></p>
+						</div>
+						<h3 class="text-2xl font-roboto-mono font-bold text-[#000000]">Ubud ATV Extreme Trek</h3>
+						<p class="text-lg font-roboto-mono font-bold text-[#000000] mt-1">From Rp 620,000</p>
+					</a>
+
+					<!-- Sixth Activity -->
+					<a href="BookingPage.html?id=activity6" class="carousel-item activity-card block bg-white p-4 rounded-lg shadow group transition duration-300 transform hover:bg-gray-200">
+						<img src="images/rockclimbing.png" alt="Rock Climbing Experience" class="rounded-lg mb-4 h-60 w-full object-cover">
+						<div class="flex justify-between items-center mb-2">
+							<h3 class="text-xl font-roboto-mono font-bold text-[#000000]">Kuta, Bali</h3>
+							<p class="text-[#000000] text-lg font-bold">4.9 <i class="fa-solid fa-star fa-lg" style="color: #FFD43B;"></i></p>
+						</div>
+						<h3 class="text-2xl font-roboto-mono font-bold text-[#000000]">Rock Climbing Experience</h3>
+						<p class="text-lg font-roboto-mono font-bold text-[#000000] mt-1">From Rp 1,100,000</p>
+					</a>
+
+					<!-- Seventh Activity -->
+					<a href="BookingPage.html?id=activity7" class="carousel-item activity-card block bg-white p-4 rounded-lg shadow group transition duration-300 transform hover:bg-gray-200">
+						<img src="images/skydiving.png" alt="Annual Bali Skydiving" class="rounded-lg mb-4 h-60 w-full object-cover">
+						<div class="flex justify-between items-center mb-2">
+							<h3 class="text-xl font-roboto-mono font-bold text-[#000000]">Kuta, Bali</h3>
+							<p class="text-[#000000] text-lg font-bold">4.7 <i class="fa-solid fa-star fa-lg" style="color: #FFD43B;"></i></p>
+						</div>
+						<h3 class="text-2xl font-roboto-mono font-bold text-[#000000]">Annual Bali Skydiving</h3>
+						<p class="text-lg font-roboto-mono font-bold text-[#000000] mt-1">From Rp 20,000,000</p>
+					</a>
+
+					<!-- Eighth Activity -->
+					<a href="BookingPage.html?id=activity8" class="carousel-item activity-card block bg-white p-4 rounded-lg shadow group transition duration-300 transform hover:bg-gray-200">
+						<img src="images/MantaBaySnorkeling.webp" alt="Manta Bay Snorkeling" class="rounded-lg mb-4 h-60 w-full object-cover">
+						<div class="flex justify-between items-center mb-2">
+							<h3 class="text-xl font-roboto-mono font-bold text-[#000000]">Nusa Lembongan, Bali</h3>
+							<p class="text-[#000000] text-lg font-bold">4.5 <i class="fa-solid fa-star fa-lg" style="color: #FFD43B;"></i></p>
+						</div>
+						<h3 class="text-2xl font-roboto-mono font-bold text-[#000000]">Manta Bay Snorkeling</h3>
+						<p class="text-lg font-roboto-mono font-bold text-[#000000] mt-1">From Rp 393,750</p>
+					</a>
+
+					<!-- Ninth Activity -->
+					<a href="BookingPage.html?id=activity9" class="carousel-item activity-card block bg-white p-4 rounded-lg shadow group transition duration-300 transform hover:bg-gray-200">
+						<img src="images/MountBaturSunriseTrekking.jpg" alt="Mount Batur 4WD Jeep" class="rounded-lg mb-4 h-60 w-full object-cover">
+						<div class="flex justify-between items-center mb-2">
+							<h3 class="text-xl font-roboto-mono font-bold text-[#000000]">Mount Batur, Bali</h3>
+							<p class="text-[#000000] text-lg font-bold">4.5 <i class="fa-solid fa-star fa-lg" style="color: #FFD43B;"></i></p>
+						</div>
+						<h3 class="text-2xl font-roboto-mono font-bold text-[#000000]">Mount Batur 4WD Jeep</h3>
+						<p class="text-lg font-roboto-mono font-bold text-[#000000] mt-1">From Rp 500,000</p>
+					</a>
+
+					<!-- Tenth Activity -->
+					<a href="BookingPage.html?id=activity10" class="carousel-item activity-card block bg-white p-4 rounded-lg shadow group transition duration-300 transform hover:bg-gray-200">
+						<img src="images/ATV and Ayung Eiver Rafting.webp" alt="ATV and Ayung River Rafting" class="rounded-lg mb-4 h-60 w-full object-cover">
+						<div class="flex justify-between items-center mb-2">
+							<h3 class="text-xl font-roboto-mono font-bold text-[#000000]">Bongkasa Pertiwi, Bali</h3>
+							<p class="text-[#000000] text-lg font-bold">4.5 <i class="fa-solid fa-star fa-lg" style="color: #FFD43B;"></i></p>
+						</div>
+						<h3 class="text-2xl font-roboto-mono font-bold text-[#000000]">ATV and Ayung River Rafting</h3>
+						<p class="text-lg font-roboto-mono font-bold text-[#000000] mt-1">From Rp 997,500</p>
+					</a>
+
+					<!-- Eleventh Activity -->
+					<a href="BookingPage.html?id=activity11" class="carousel-item activity-card block bg-white p-4 rounded-lg shadow group transition duration-300 transform hover:bg-gray-200">
+						<img src="images/Bali Parasailing Adventure.webp" alt="Bali Parasailing Adventure" class="rounded-lg mb-4 h-60 w-full object-cover">
+						<div class="flex justify-between items-center mb-2">
+							<h3 class="text-xl font-roboto-mono font-bold text-[#000000]">Tanjung Benoa, Bali</h3>
+							<p class="text-[#000000] text-lg font-bold">4.9 <i class="fa-solid fa-star fa-lg" style="color: #FFD43B;"></i></p>
+						</div>
+						<h3 class="text-2xl font-roboto-mono font-bold text-[#000000]">Bali Parasailing Adventure</h3>
+						<p class="text-lg font-roboto-mono font-bold text-[#000000] mt-1">From Rp 625,000</p>
+					</a>
+
+					<!-- Twelth Activity -->
+					<a href="BookingPage.html?id=activity12" class="carousel-item activity-card block bg-white p-4 rounded-lg shadow group transition duration-300 transform hover:bg-gray-200">
+						<img src="images/Kecak Fire Dance Tour2.webp" alt="Kecak Fire Dance Tour" class="rounded-lg mb-4 h-60 w-full object-cover">
+						<div class="flex justify-between items-center mb-2">
+							<h3 class="text-xl font-roboto-mono font-bold text-[#000000]">Tanjung Benoa, Bali</h3>
+							<p class="text-[#000000] text-lg font-bold">4.7 <i class="fa-solid fa-star fa-lg" style="color: #FFD43B;"></i></p>
+						</div>
+						<h3 class="text-2xl font-roboto-mono font-bold text-[#000000]">Kecak Fire Dance Tour</h3>
+						<p class="text-lg font-roboto-mono font-bold text-[#000000] mt-1">From Rp 100,000</p>
+					</a>
+
+					<!-- Thirteenth Activity -->
+					<a href="BookingPage.html?id=activity13" class="carousel-item activity-card block bg-white p-4 rounded-lg shadow group transition duration-300 transform hover:bg-gray-200">
+						<img src="images/Water Sport Experience.webp" alt="Water Sport Experience" class="rounded-lg mb-4 h-60 w-full object-cover">
+						<div class="flex justify-between items-center mb-2">
+							<h3 class="text-xl font-roboto-mono font-bold text-[#000000]">Tanjung Benoa, Bali</h3>
+							<p class="text-[#000000] text-lg font-bold">4.5 <i class="fa-solid fa-star fa-lg" style="color: #FFD43B;"></i></p>
+						</div>
+						<h3 class="text-2xl font-roboto-mono font-bold text-[#000000]">Water Sport Experience</h3>
+						<p class="text-lg font-roboto-mono font-bold text-[#000000] mt-1">From Rp 15,333</p>
+					</a>
+
+					<!-- Fourteenth Activity -->
+					<a href="BookingPage.html?id=activity14" class="carousel-item activity-card block bg-white p-4 rounded-lg shadow group transition duration-300 transform hover:bg-gray-200">
+						<img src="images/Telaga Waja Rafting.jpg" alt="Telaga Waja Rafting" class="rounded-lg mb-4 h-60 w-full object-cover">
+						<div class="flex justify-between items-center mb-2">
+							<h3 class="text-xl font-roboto-mono font-bold text-[#000000]">Bali Tubing & Rafting, Bali</h3>
+							<p class="text-[#000000] text-lg font-bold">4.5 <i class="fa-solid fa-star fa-lg" style="color: #FFD43B;"></i></p>
+						</div>
+						<h3 class="text-2xl font-roboto-mono font-bold text-[#000000]">Telaga Waja Rafting</h3>
+						<p class="text-lg font-roboto-mono font-bold text-[#000000] mt-1">From Rp 307,500</p>
+					</a>
+
+					<!-- Fifteenth Activity -->
+					<a href="BookingPage.html?id=activity15" class="carousel-item activity-card block bg-white p-4 rounded-lg shadow group transition duration-300 transform hover:bg-gray-200">
+						<img src="images/River Rafting Adventure in Ubud.jpg" alt="River Rafting Adventure in Ubud" class="rounded-lg mb-4 h-60 w-full object-cover">
+						<div class="flex justify-between items-center mb-2">
+							<h3 class="text-xl font-roboto-mono font-bold text-[#000000]">Ubud, Bali</h3>
+							<p class="text-[#000000] text-lg font-bold">4.5 <i class="fa-solid fa-star fa-lg" style="color: #FFD43B;"></i></p>
+						</div>
+						<h3 class="text-2xl font-roboto-mono font-bold text-[#000000]">River Rafting Adventure in Ubud</h3>
+						<p class="text-lg font-roboto-mono font-bold text-[#000000] mt-1">From Rp 239,063</p>
+					</a>
+                    
+
+				</div>
+
+				<!-- Navigation Buttons -->
+				<button id="carouselPrev" class="absolute top-1/2 left-2 transform -translate-y-1/2 rounded-full bg-[#9A040F] text-white ml-4 p-2 px-4 hover:bg-[#740b21]">
+					<i class="fas fa-chevron-left text-xl"></i>
+				</button>
+				<button id="carouselNext" class="absolute top-1/2 right-2 transform -translate-y-1/2 rounded-full bg-[#9A040F] text-white mr-4 p-2 px-4 hover:bg-[#740b21]">
+					<i class="fas fa-chevron-right text-xl"></i>
+				</button>
+			</div>
+		</section>
+
+    <!-- Footer -->
+    <footer class="bg-[#212121] text-white py-8 px-12">
+        <div class="container mx-auto flex flex-col md:flex-row justify-between items-start space-y-6 md:space-y-0">
+            <!-- Logo and Description -->
+            <div class="flex flex-col items-start space-y-4 md:w-1/2">
+                <img src="icons/ThrillX Logo.png" alt="ThrillX Logo" class="h-12">
+                <p class="text-sm font-roboto text-justify">
+                    THRILLX is a platform for users to book extreme sports or extreme attraction places specifically in Indonesia 
+                    and create a social media for users to interact with each other by sharing their experiences through pictures or videos. 
+                    By exploring through the pictures and videos shared online, they can also find and join a community based on their interests.
+                </p>
+            </div>
+
+            <!-- Explore More and Payment Channels -->
+            <div class="flex flex-row justify-between">
+                <div class="flex flex-col mr-10 pr-4">
+                    <!-- Explore More -->
+                    <div class="flex flex-col text-left w-50 pr-10 mr-10">
+                        <h4 class="font-roboto text-lg uppercase text-[#9a0c0c]">Explore More</h4>
+                        <a href="#" class="text-large font-roboto mt-2 pt-2 pb-2 text-white hover:text-[#9a0c0c]">Support</a>
+                        <a href="#" class="text-large font-roboto mt-2 text-white hover:text-[#9a0c0c]">Partnership</a>
+                    </div>
+                </div>
+
+                <!-- Payment Channels -->
+                <div class="flex flex-col">
+                    <h4 class="font-roboto text-lg uppercase text-[#9a0c0c]">Payment Channels</h4>
+                    <div class="grid grid-cols-4 gap-1 mr-10 mt-2">
+                        <img src="icons/paypal.png" alt="PayPal" class="w-12">
+                        <img src="icons/visa.png" alt="Visa" class="w-12">
+                        <img src="icons/mastercard.png" alt="MasterCard" class="w-12">
+                        <img src="icons/skrill.png" alt="Skrill" class="w-12">
+                        <img src="icons/ebay.png" alt="eBay" class="w-12">
+                        <img src="icons/discover.png" alt="Discover" class="w-12">
+                        <img src="icons/maestro.png" alt="Maestro" class="w-12">
+                        <img src="icons/solo.png" alt="Solo" class="w-12">
+                        <img src="icons/cirrus.png" alt="Cirrus" class="w-12">
+                        <img src="icons/2checkout.png" alt="2Checkout" class="w-12">
+                        <img src="icons/western-union.png" alt="Western Union" class="w-12">
+                        <img src="icons/google-wallet.png" alt="Google Wallet" class="w-12">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+<body>
+
+<script type="module" src="SessionTimeout.js"></script>
+<script type="module" src="BookingPage.js"></script>    
+<script type="module" src="bookingPagePopulate.js"></script>
+<script type="module" src="addToCartBookingPage.js"></script>
+<!-- <script type="module" src="bookingPageExploreMore.js"></script> -->
+
+<script>
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+        e.preventDefault(); // Prevent the default anchor link behavior
+        
+        // Get the target element
+        const targetElement = document.querySelector(this.getAttribute('href'));
+        
+        // Scroll to the target element with an offset
+        window.scrollTo({
+            top: targetElement.offsetTop - 60,
+            behavior: 'smooth' // Smooth scrolling
+        });
+    });
+    });
+
+    // Navbar Hide/Show on Scroll
+	let lastScrollY = window.scrollY;
+	window.addEventListener('scroll', () => {
+		const navbar = document.getElementById('navbar');
+		
+		if (window.scrollY > 0) {
+			// Hide the navbar when scrolling down or up, unless we're at the very top
+			navbar.style.transform = 'translateY(-100%)';
+		} else {
+			// Show the navbar only when at the very top of the page
+			navbar.style.transform = 'translateY(0)';
+		}
+		
+		lastScrollY = window.scrollY;
+	});
+
+	const scrollToTopButton = document.getElementById('scrollToTopButton');
+	const stickyAvailability = document.getElementById('stickyAvailability');
+	const availabilityStickyOffset = 800;
+	const navbarHeight = 50;
+	const stopStickyScrollPoint = 2400; // The scroll point where sticky stops
+	let lastFixedPosition = null; // Stores the last fixed scroll position
+
+	// Show or hide the scroll to top button based on scroll position
+	window.onscroll = function () {
+		if (window.scrollY > availabilityStickyOffset + 200) {  // Additional offset to avoid overlap with stickyAvailability
+			scrollToTopButton.classList.remove('hidden');
+			scrollToTopButton.classList.add('block');
+			scrollToTopButton.classList.remove('opacity-0');
+			scrollToTopButton.classList.add('opacity-100');
+		} else {
+			scrollToTopButton.classList.add('hidden');
+			scrollToTopButton.classList.remove('block');
+			scrollToTopButton.classList.add('opacity-0');
+			scrollToTopButton.classList.remove('opacity-100');
+		}
+	};
+
+	// Scroll-to-top functionality
+	scrollToTopButton.addEventListener('click', function () {
+		window.scrollTo({
+			top: 0,
+			behavior: 'smooth'
+		});
+	});
+
+	// Handle scroll event for the sticky availability container
+	window.addEventListener('scroll', function () {
+		const scrollY = window.scrollY;
+
+		// When the user scrolls beyond the sticky offset but before the stop point
+		if (scrollY >= availabilityStickyOffset && scrollY < stopStickyScrollPoint) {
+			// The sticky element should follow the user, staying fixed just below the navbar
+			stickyAvailability.style.position = 'fixed';
+			stickyAvailability.style.top = `${navbarHeight}px`;
+			stickyAvailability.style.width = `${stickyAvailability.parentNode.offsetWidth}px`; // Maintain original width
+			lastFixedPosition = scrollY;  // Store the last fixed position
+		} 
+		// Once we scroll past the stop point, the sticky element will stay fixed at the last position
+		else if (scrollY >= stopStickyScrollPoint && lastFixedPosition !== null) {
+			// Once we reach the stop point, stick to the last position and stop following the user
+			stickyAvailability.style.position = 'relative';
+			stickyAvailability.style.top = `${lastFixedPosition - availabilityStickyOffset + navbarHeight}px`; // Keep at the last fixed position
+		} 
+		// If we scroll above the sticky offset, reset the position to static
+		else {
+			stickyAvailability.style.position = 'static';
+		}
+	});
+	
+    // Carousel Navigation
+    const carouselItems = Array.from(document.querySelectorAll('.carousel-item'));
+    const prevButton = document.getElementById('carouselPrev');
+    const nextButton = document.getElementById('carouselNext');
+    let startIndex = 0;
+
+    function updateCarousel() {
+      carouselItems.forEach((item) => item.classList.add('hidden'));
+      
+      for (let i = 0; i < 3; i++) {
+        const itemIndex = (startIndex + i) % carouselItems.length;
+        carouselItems[itemIndex].classList.remove('hidden');
+      }
+    }
+
+    prevButton.addEventListener('click', () => {
+      startIndex = (startIndex - 3 + carouselItems.length) % carouselItems.length;
+      updateCarousel();
+    });
+
+    nextButton.addEventListener('click', () => {
+      startIndex = (startIndex + 3) % carouselItems.length;
+      updateCarousel();
+    });
+
+    updateCarousel();
+
+    // Hide dropdown if clicked outside
+    const accountDropdownButton = document.getElementById("accountDropdownButton");
+    const accountDropdownMenu = document.getElementById("accountDropdownMenu");
+
+    accountDropdownButton.addEventListener("click", (event) => {
+      event.stopPropagation();
+      accountDropdownMenu.classList.toggle("hidden");
+    });
+
+    // Close the dropdown on scroll
+    window.addEventListener("scroll", () => {
+      if (!accountDropdownMenu.classList.contains("hidden")) {
+        accountDropdownMenu.classList.add("hidden");
+      }
+    });
+
+    // Close the dropdown if the user clicks outside of it
+    document.addEventListener("click", (event) => {
+      if (!accountDropdownButton.contains(event.target) && !accountDropdownMenu.contains(event.target)) {
+        accountDropdownMenu.classList.add("hidden");
+      }
+    });
+
+    // Dropdown Menu Functionality
+    const dropdownButton = document.getElementById('dropdownButton');
+    const dropdownMenu = document.getElementById('dropdownMenu');
+    const dropdownLinks = dropdownMenu.querySelectorAll('a');
+
+    // Toggle dropdown visibility
+    dropdownButton.addEventListener('click', () => {
+        dropdownMenu.classList.toggle('hidden');
+    });
+
+    // Update dropdown button
+    dropdownLinks.forEach(link => {
+        link.addEventListener('click', (event) => {
+            event.preventDefault();
+            dropdownButton.innerHTML = `${event.target.textContent} <i class="fas fa-chevron-down ml-2"></i>`;
+            dropdownMenu.classList.add('hidden');
+        });
+    });
+
+    // Hide dropdown if clicked outside
+    window.addEventListener('click', (event) => {
+        if (!dropdownButton.contains(event.target)) {
+            dropdownMenu.classList.add('hidden');
+        }
+    });
+
+    // FAQ Toggle Functionality
+    function toggleFAQ(faqNumber) {
+        const faq = document.getElementById(`faq${faqNumber}`);
+        const plusMinus = document.getElementById(`plusMinus${faqNumber}`);
+
+        faq.classList.toggle('hidden');
+        plusMinus.innerHTML = faq.classList.contains('hidden') ? "+" : "-";
+    }
+	
+</script>
+
+</body>
+</html>
